@@ -1,0 +1,105 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.chat-container {
+    width: 100%;
+    max-width: 500px;
+    margin: auto;
+    background-color: #fff;
+    border: 2px solid #f0f0f0;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.chat-bubble {
+    padding: 10px 20px; /* 패딩 조정 */
+    margin-bottom: 10px; /* 하단 여백 */
+    border-radius: 20px; /* 더욱 둥근 모서리 */
+}
+
+.user-bubble {
+    background-color: #FFFFFF; /* 사용자 말풍선은 연한 주황색으로 */
+    text-align: right;
+    color: #333; /* 텍스트 색상 */
+}
+
+.bot-bubble {
+    background-color: #FFFFFF;
+    text-align: left;
+}
+
+.chat-input {
+    box-sizing: border-box;
+    border: 1px solid #FFFFFF;
+    border-radius: 5px;
+    width: auto; /* Adjust based on your design */
+    padding: 10px;
+}
+
+.send-button {
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #FF4500;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.intro-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.intro-container img{
+    width: 20%;
+    min-width: 300px;
+}
+
+#loader{
+    font-size: 25px;
+    text-align: center;
+}
+
+.intro-container h1,
+.intro-container img,
+.intro-container input,
+.intro-container div {
+    margin-bottom: 20px; /* 각 요소 아래에 50px의 공간을 추가 */
+}
+
+/* 라디오 버튼이 포함된 div 내부 요소에 대한 스타일 */
+.intro-container div label,
+.intro-container div input {
+    margin-bottom: 0; /* div 내부 요소의 마진은 제거 */
+}
+
+/* 폼 요소 스타일링 (선택적) */
+input[type="text"],
+input[type="number"] {
+    width: 200px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+input[type="radio"] {
+    margin-right: 5px;
+}
+
+/* 글밥 드롭다운 뒤의 버튼에 대한 마진 설정 */
+#storyContent + button {
+    margin-top: 20px; /* 버튼 상단에 10px의 여유 공간 추가 */
+    padding: 15px 30px; /* 버튼의 패딩을 늘려 크기를 키움 */
+    background-color: #FF4500; /* 주황색 배경 */
+    color: white; /* 하얀색 글씨 */
+    font-size: 16px; /* 글씨 크기 */
+    border: none; /* 테두리 제거 */
+    border-radius: 5px; /* 버튼 모서리 둥글게 */
+    cursor: pointer; 
+}
