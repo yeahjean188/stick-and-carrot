@@ -1,0 +1,8 @@
+메모내용 남겨주세요
+
+0422 월
+-repository 생성
+
+(to-do)
+-뼈대 만들기
+: web main page -> img, txt 추가
