@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>CarrotTales</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" 
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" 
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+        <div id="intro" class="intro-container">
+            <h1>나만의 동화책 생성하러 가기</h1>
+            <img src="carrot.png" alt="chatdoge">
+            <!-- 주인공 이름, 나이, 성별, 관심사, 개선해야하는 행동, 글밥 -->
+            <label for="name">이름</label>
+            <input id="name" type="name">
+
+            <label for="age">나이</label>
+            <input id="age" type="age">
+
+            <label for="gender">성별</label>
+            <div id="gender">
+                <input type="radio" id="male" name="gender" value="male">
+                <label for="male">남자</label><br>
+                <input type="radio" id="female" name="gender" value="female">
+                <label for="female">여자</label><br>
+            </div>
+
+            <label for="like">관심사</label>
+            <input id="like" type="like">
+
+            <label for="hateFood">편식하는 재료</label>
+            <input id="hateFood" type="hateFood">
+
+            <label for="storyContent">글밥</label>
+            <select id="storyContent">
+                <option value="short">적음</option>
+                <option value="long">많음</option>
+            </select>
+            
+            <button onclick="start()">동화책 생성하기</button>
+        </div>
+
+        <div id="chat" class="chat-container" style="display: none;">
+            <div class="chat-bubble user-bubble">
+                안녕하세요! 동화책 생성을 요청하세요
+            </div>
+            <div class="chat-bubble bot-bubble" id="fortuneResponse">
+                <!-- The fortune response will appear here -->
+            </div>
+            <div id="loader" class="loader" style="display: none;">
+                <i class="loading-icon fas fa-spinner fa-spin"></i>
+            </div>
+            <input type="text" class="chat-input" id="messageInput" placeholder="메시지를 입력하세요...">
+            <button class="send-button" onclick="sendMessage()">보내기</button>
+        </div>
+        <script src="script.js"></script>
+    </body>
+</html>
