@@ -29,10 +29,10 @@ async function start() {
     const message = '동화책 생성해줘';  
 
     //채팅 말풍선에 사용자의 메시지 출력
-    const userBubble = document.createElement('div');
-    userBubble.className = 'chat-bubble user-bubble';
-    userBubble.textContent = message;
-    document.getElementById('fortuneResponse').appendChild(userBubble);
+    // const userBubble = document.createElement('div');
+    // userBubble.className = 'chat-bubble user-bubble';
+    // userBubble.textContent = message;
+    // document.getElementById('fortuneResponse').appendChild(userBubble);
     
     //Push
     userMessages.push(message);

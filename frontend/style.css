@@ -103,3 +103,10 @@ input[type="radio"] {
     border-radius: 5px; /* 버튼 모서리 둥글게 */
     cursor: pointer; 
 }
+
+.loading{
+    display: none;
+}
+.loading.show{
+    display: block;
+}

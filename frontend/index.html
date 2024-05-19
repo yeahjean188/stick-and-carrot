@@ -51,6 +51,26 @@
             <div id="loader" class="loader" style="display: none;">
                 <i class="loading-icon fas fa-spinner fa-spin"></i>
             </div>
+
+            <div>
+                <input
+                    type="text"
+                    id="dalleText"
+                    placeholder="이미지 설명 입력"
+                >
+                <button type="submit">이미지 생성</button>
+            </div>
+            <div>
+                <h2 class = "image"></h2>
+                <figure>
+                    <img src="" alt="" id="image" />
+                </figure>
+                <p class = "loading">이미지 생성 중...</p>
+            </div>
+
+            <footer>
+                <p><a href="https://beta.openai.com/docs" target="_blank">Powered By OpenAI</a></p>
+            </footer>
         </div>
         <script src="script.js"></script>
     </body>

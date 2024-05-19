@@ -1,23 +1,41 @@
 const OpenAI = require('openai');
-
+//const openai = process.env.OPEN_API_KEY
 const openai = new OpenAI({
-    apiKey: "",
+    apiKey: "sk-proj-2Oz9jp8nCySJbg17I1pGT3BlbkFJYWPl8TT4EZRfBV8Vl8SZ",
 });
 
-//serverless-http 설정
-const serverless = require('serverless-http')
+//port 설정
+const port = process.env.PORT || 3000;
 
 //express 설정
 const express = require('express')
 const app = express()
 
+//dotenv 설정
+const dotenv = require('dotenv').config();
+
 //CORS 문제 해결
 const cors = require('cors')
 app.use(cors())
 
+//path 설정
+const path = require('path');
+
 //POST 요청 받을 수 있게 만듦
 app.use(express.json()) // for parsing application/json
-app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+app.use(express.urlencoded({ extended: false })) // for parsing application/x-www-form-urlencoded
+app.use(express.static(path.join(__dirname, 'frontend')));
+
+//Image generate function
+const generateImage = async (req, res) => {
+    const response = await openai.createImage({
+        prompt: "A cute baby sea otter",
+        n: 1,
+        size: "512X512",
+    });
+    const image_url = response.data.data[0].url;
+    res.json({ data: image_url});
+} 
 
 //POST 요청
 app.post('/fortuneTell', async function (req, res) {
@@ -56,4 +74,15 @@ app.post('/fortuneTell', async function (req, res) {
     res.json({ "assistant": fortune });
 });
 
-app.listen(3000)
+//HOME
+// app.get('/', (req, res) => {
+//     res.render('index.html')
+// })
+
+//Image generator(post)
+app.post('/generate', generateImage);
+
+//app.listen(3000)
+app.listen(port, () => {
+    console.log(`Server running at ${port}`);
+})
