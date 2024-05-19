@@ -1,7 +1,6 @@
 // 변수 생성
 let userMessages = [];
 let assistantMessages = [];
-let myDateTime = '';
 
 
 function start() {
@@ -11,10 +10,7 @@ function start() {
     const like = document.getElementById('like').value;
     const hateFood = document.getElementById('hateFood').value;
     const storyContent = document.getElementById('storyContent').value;
-    // if (date === '') {
-    //     alert('생년월일을 입력해주세요.');
-    //     return;
-    // }
+
     myName = name;
     myAge = age;
     myGender = gender;
@@ -48,7 +44,7 @@ async function sendMessage() {
 
     //백엔드 서버에 메시지를 보내고 응답 출력
     try {
-        const response = await fetch('https://mxewedwbxdnjndefvix4t2njca0wvqrx.lambda-url.ap-northeast-2.on.aws/fortuneTell', {
+        const response = await fetch('http://localhost:3000/fortuneTell', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

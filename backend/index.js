@@ -13,12 +13,7 @@ const app = express()
 
 //CORS 문제 해결
 const cors = require('cors')
-//app.use(cors())
-let corsOptions = {
-    origin: 'https://carrot-tales.pages.dev',
-    credentials: true
-}
-app.use(cors(corsOptions));
+app.use(cors())
 
 //POST 요청 받을 수 있게 만듦
 app.use(express.json()) // for parsing application/json
@@ -61,5 +56,4 @@ app.post('/fortuneTell', async function (req, res) {
     res.json({ "assistant": fortune });
 });
 
-module.exports.handler = serverless(app)
-// app.listen(3000)
+app.listen(3000)
