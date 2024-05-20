@@ -52,21 +52,26 @@
                 <i class="loading-icon fas fa-spinner fa-spin"></i>
             </div>
 
-            <div>
-                <input
-                    type="text"
-                    id="dalleText"
-                    placeholder="이미지 설명 입력"
-                >
-                <button type="submit">이미지 생성</button>
-            </div>
-            <div>
-                <h2 class = "image"></h2>
+            <section>
+                <form id="image-form">
+                    <div>
+                        <input
+                        type="text"
+                        class="form-control"
+                        id="text"
+                        placeholder="이미지 설명 입력"
+                    >
+                    </div>
+                    <button type="submit">이미지 생성</button>
+                </form>
+            </section>
+
+            <section class = "image">
                 <figure>
                     <img src="" alt="" id="image" />
                 </figure>
                 <p class = "loading">이미지 생성 중...</p>
-            </div>
+            </section>
 
             <footer>
                 <p><a href="https://beta.openai.com/docs" target="_blank">Powered By OpenAI</a></p>

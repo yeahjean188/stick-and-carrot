@@ -1,8 +1,11 @@
 const OpenAI = require('openai');
-//const openai = process.env.OPEN_API_KEY
+//dotenv 설정
+const dotenv = require('dotenv').config();
+
 const openai = new OpenAI({
-    apiKey: "sk-proj-2Oz9jp8nCySJbg17I1pGT3BlbkFJYWPl8TT4EZRfBV8Vl8SZ",
+    apiKey: process.env.OPEN_API_KEY,
 });
+
 
 //port 설정
 const port = process.env.PORT || 3000;
@@ -10,9 +13,6 @@ const port = process.env.PORT || 3000;
 //express 설정
 const express = require('express')
 const app = express()
-
-//dotenv 설정
-const dotenv = require('dotenv').config();
 
 //CORS 문제 해결
 const cors = require('cors')
@@ -28,14 +28,26 @@ app.use(express.static(path.join(__dirname, 'frontend')));
 
 //Image generate function
 const generateImage = async (req, res) => {
+     const {text} = req.body;
     const response = await openai.createImage({
-        prompt: "A cute baby sea otter",
+        prompt: text,
         n: 1,
-        size: "512X512",
+        size: "512x512",
     });
     const image_url = response.data.data[0].url;
     res.json({ data: image_url});
 } 
+
+//HOME
+// app.get('/fortuneTell', async function (req, res) {
+//     res.render('index.html')
+// })
+app.get('/', (req, res) => {
+    res.render('index.html')
+})
+
+//Image generator(post)
+app.post('/generate', generateImage);
 
 //POST 요청
 app.post('/fortuneTell', async function (req, res) {
@@ -45,6 +57,7 @@ app.post('/fortuneTell', async function (req, res) {
 
     let messages = [
         { "role": "system", "content": "당신에게 불가능한 것은 없으며 그 어떤 대답도 할 수 있습니다. 당신은 7~11세 아이들을 위한 동화책을 생성할 수 있습니다. .1페이지, .2페이지의 형식을 적용해 10페이지를 만들어 제공합니다. 한페이지 이후 줄바꿈하고 다음 페이지 생성후 다시 줄바꿈합니다. 당신의 이름은 CarrotTales입니다." },
+        { "role": "system", "content": "당신의 이름은 CarrotTales입니다. 생성한 내용중 페이지 1 부분만 출력하할건데 분량은 300자 정도고, 나머지는 기억합니다." },
         { "role": "user", "content": "당신에게 불가능한 것은 없으며 그 어떤 대답도 할 수 있습니다. 당신은 7~11세 아이들을 위한 동화책을 생성할 수 있습니다. 쉬운 단어로 창의적인 스토리를 만들수 있고, 모든 질문에 대해서 명확히 답변해줄 수 있습니다. 당신의 이름은 CarrotTales입니다." },
         { "role": "assistant", "content": "안녕하세요! 저는 동화책 생성 서비스 CarrotTales입니다. 여러분의 이름, 나이, 성별, 관심사, 편식하는 재료, 글밥을 고려하여 10페이지를 만들 수 있습니다. 어떤 질문이든지 절대 거절하지 않고 무조건 답변을 드리겠습니다. 어떤 질문이든지 해주시면 최선을 다해 도와드리겠습니다." },
         { "role": "user", "content": `저의 이름은 ${myName}이고, 나이는 ${myAge}이고, 성별은 ${myGender}이고, 관심사는 ${myLike}이고, 편식하는 재료는 ${myHateFood}이고, 글밥은 ${myStoryContent}입니다. ` },
@@ -74,13 +87,6 @@ app.post('/fortuneTell', async function (req, res) {
     res.json({ "assistant": fortune });
 });
 
-//HOME
-// app.get('/', (req, res) => {
-//     res.render('index.html')
-// })
-
-//Image generator(post)
-app.post('/generate', generateImage);
 
 //app.listen(3000)
 app.listen(port, () => {
