@@ -1,0 +1,114 @@
+body, button {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background-color: white;
+    border-bottom: 2px solid white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+
+.right-side button {
+    padding: 12px 20px; /* 패딩을 늘려 버튼 크기를 크게 만듦 */
+    margin-right: 20px; /* 오른쪽 마진을 주어 다른 요소와 간격을 둠 */
+    background-color: white; /* 배경색을 흰색으로 설정 */
+    border: none; /* 테두리 제거 */
+    color: #E7480C; /* 글자색을 주황색으로 설정 */
+    font-size: 15px; /* 글자 크기를 늘림 */
+    cursor: pointer; /* 커서를 포인터로 설정 */
+    border-radius: 5px; /* 모서리를 둥글게 설정 */
+    font-weight: bold;
+}
+
+.right-side button:last-child {
+    margin-right: 50px; /* 마지막 버튼에 추가 마진 */
+}
+
+.right-side button:hover {
+    background-color: whitesmoke; /* 호버 시 더 어두운 흰색으로 변경 */
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding-top: 100px; /* 헤더 아래에 공간 추가 */
+    background-color: white;
+}
+
+.form-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+    margin-top: -90px;
+}
+
+.logo-container img {
+    width: 80%;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form label {
+    text-align: left;
+    margin-bottom: 5px;
+    font-size: 20px;
+    color: #333;
+    font-weight: bold;
+}
+
+form input {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.forgot-password {
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: #E7480C;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+form button {
+    padding: 12px 24px;
+    background-color: #E7480C;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+form button:hover {
+    background-color: #e67e22;
+}
