@@ -82,7 +82,7 @@ async function start() {
 }
 
 function onSubmit(e) {
-    e.preventDafault();
+    e.preventDefault(); 
     document.querySelector('#image').src='';
 
     //입력 테스트
@@ -97,18 +97,26 @@ document.querySelector('#image-form').addEventListener('submit', onSubmit);
 
 // 이미지 생성 요청 함수
 async function generateImageRequest(text) {
-    const response = await fetch('/generate', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({text: text})
-    })
-
-    if(!response.ok){
-        throw new Error('이미지 생성 오류')
+    try {
+        const response = await fetch('/generate', {             
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ text: text }) // 'text' is the prompt
+        });
+    
+        if (!response.ok) {
+            throw new Error('이미지 생성 오류');
+        }
+    
+        const data = await response.json();
+        console.log(data);
+    
+        // Assuming the response contains the image URL in data.imageUrl
+        const imageUrl = data.imageUrl;
+        document.querySelector('#image').src = imageUrl; // Set the image source to the generated image URL
+    } catch (error) {
+        console.error("Error generating image:", error);
     }
-
-    const data = await response.json();
-    console.log(data)
 }

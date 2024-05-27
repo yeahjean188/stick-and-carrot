@@ -35,6 +35,7 @@ const openai = new OpenAI({
 const generateImage = async (req, res) => {
     const {text} = req.body;
     const response = await openai.images.generate({
+        //openai.createImage가 원래
         model: 'dall-e-3',
         prompt: text,
         n: 1,
