@@ -1,11 +1,5 @@
-const OpenAI = require('openai');
 //dotenv 설정
 const dotenv = require('dotenv').config();
-
-const openai = new OpenAI({
-    apiKey: process.env.OPEN_API_KEY,
-});
-
 
 //port 설정
 const port = process.env.PORT || 3000;
@@ -26,6 +20,32 @@ app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: false })) // for parsing application/x-www-form-urlencoded
 app.use(express.static(path.join(__dirname, 'frontend')));
 
+const OpenAI = require('openai');
+const openai = new OpenAI({
+    apiKey: process.env.OPEN_API_KEY,
+});
+
+// const {Configuration, OpenAI} = require("openai");
+// const configuration = new Configuration({
+//     apiKey: process.env.OPEN_API_KEY,
+// });
+// const openai = new OpenAI(configuration);
+
+//Image Generate Function
+const generateImage = async (req, res) => {
+    const {text} = req.body;
+    const response = await openai.images.generate({
+        model: 'dall-e-3',
+        prompt: text,
+        n: 1,
+        size: "1024x1024",
+    })
+    console.log("response", response);
+    const image_url = response.data.data[0].url;
+    res.json({data: image_url});
+}
+//generateImage();
+
 //HOME
 // app.get('/fortuneTell', async function (req, res) {
 //     res.render('index.html')
@@ -34,6 +54,8 @@ app.get('/', (req, res) => {
     res.render('index.html')
 })
 
+//Image Generator(Post)
+app.post('/generate', generateImage);
 
 //POST 요청
 app.post('/fortuneTell', async function (req, res) {
@@ -72,18 +94,6 @@ app.post('/fortuneTell', async function (req, res) {
 
     res.json({ "assistant": fortune });
 });
-
- const image_generate=async()=>{
-    const response=await openai.images.generate({
-        model: 'dall-e-3',
-        prompt: 'a lion',
-        n: 1,
-        size: "1024x1024"
-    })
-    console.log("response", response)
- }
-
- image_generate();
 
 //app.listen(3000)
 app.listen(port, () => {
