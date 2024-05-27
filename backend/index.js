@@ -26,18 +26,6 @@ app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: false })) // for parsing application/x-www-form-urlencoded
 app.use(express.static(path.join(__dirname, 'frontend')));
 
-//Image generate function
-const generateImage = async (req, res) => {
-     const {text} = req.body;
-    const response = await openai.createImage({
-        prompt: text,
-        n: 1,
-        size: "512x512",
-    });
-    const image_url = response.data.data[0].url;
-    res.json({ data: image_url});
-} 
-
 //HOME
 // app.get('/fortuneTell', async function (req, res) {
 //     res.render('index.html')
@@ -46,8 +34,6 @@ app.get('/', (req, res) => {
     res.render('index.html')
 })
 
-//Image generator(post)
-app.post('/generate', generateImage);
 
 //POST 요청
 app.post('/fortuneTell', async function (req, res) {
@@ -87,6 +73,17 @@ app.post('/fortuneTell', async function (req, res) {
     res.json({ "assistant": fortune });
 });
 
+ const image_generate=async()=>{
+    const response=await openai.images.generate({
+        model: 'dall-e-3',
+        prompt: 'a lion',
+        n: 1,
+        size: "1024x1024"
+    })
+    console.log("response", response)
+ }
+
+ image_generate();
 
 //app.listen(3000)
 app.listen(port, () => {

@@ -13,7 +13,8 @@
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "openai": "^4.47.1",
-    "serverless-http": "^3.2.0"
+    "serverless-http": "^3.2.0",
+    "yarn": "^1.22.22"
   },
   "description": "",
   "devDependencies": {
