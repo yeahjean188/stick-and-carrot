@@ -41,8 +41,14 @@ const generateImage = async (req, res) => {
         n: 1,
         size: "1024x1024",
     })
-    console.log("response", response);
+    //console.log("response", response);
+    const url = response.data.url;
+    console.log("url", url);
+
+    // 데이터 구조 확인 및 방어적 접근
     const image_url = response.data.data[0].url;
+    //const image_url = response.data.data[0].url;
+    //이미지 응답
     res.json({data: image_url});
 }
 //generateImage();

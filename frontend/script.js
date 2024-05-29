@@ -98,7 +98,7 @@ document.querySelector('#image-form').addEventListener('submit', onSubmit);
 // 이미지 생성 요청 함수
 async function generateImageRequest(text) {
     try {
-        const response = await fetch('/generate', {             
+        const response = await fetch('http://localhost:3000/generate', {             
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -114,7 +114,15 @@ async function generateImageRequest(text) {
         console.log(data);
     
         // Assuming the response contains the image URL in data.imageUrl
-        const imageUrl = data.imageUrl;
+        //const imageUrl = data.data; //원래 data.imageUrl이었음
+        //const imageUrl = data?.data;
+        const imageUrl = response?.data?.[0]?.url;
+        console.log(imageUrl);
+        
+        if (!imageUrl) {
+            throw new Error('이미지 URL이 정의되지 않았습니다');
+        }
+
         document.querySelector('#image').src = imageUrl; // Set the image source to the generated image URL
     } catch (error) {
         console.error("Error generating image:", error);
