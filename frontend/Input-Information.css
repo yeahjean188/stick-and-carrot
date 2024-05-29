@@ -16,6 +16,7 @@ header {
     top: 0;
     left: 0;
     z-index: 1000;
+    box-sizing: border-box;
 }
 
 
@@ -44,6 +45,8 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%; /* 추가된 부분 */
+    box-sizing: border-box; /* 추가된 부분 */
 }
 
 .text-container {
