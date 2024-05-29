@@ -1,7 +1,6 @@
 // 변수 생성
 let userMessages = [];
 let assistantMessages = [];
-let myDateTime = '';
 
 
 function start() {
@@ -30,15 +29,14 @@ async function sendMessage() {
     //로딩 아이콘 보여주기
     document.getElementById('loader').style.display = "block";
 
-    //사용자의 메시지 가져옴
-    const messageInput = document.getElementById('messageInput');
-    const message = messageInput.value;  
+    //동화책 생성 자동화 입력
+    const message = '동화책 생성해줘';  
+    //Push
+    userMessages.push(message);
 
-    //채팅 말풍선에 사용자의 메시지 출력
-    const userBubble = document.createElement('div');
-    userBubble.className = 'chat-bubble user-bubble';
-    userBubble.textContent = message;
-    document.getElementById('fortuneResponse').appendChild(userBubble);
+    //사용자의 메시지 가져옴
+    // const messageInput = document.getElementById('messageInput');
+    // const message = messageInput.value;  
     
     //Push
     userMessages.push(messageInput.value);
