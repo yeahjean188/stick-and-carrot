@@ -16,8 +16,6 @@ header {
     top: 0;
     left: 0;
     z-index: 1000;
-    box-sizing: border-box;
-    height: 100px; /* 고정 높이 지정 이번에 추가 */
 }
 
 
@@ -46,8 +44,6 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%; /* 추가된 부분 */
-    box-sizing: border-box; /* 추가된 부분 */
 }
 
 .text-container {
@@ -112,25 +108,4 @@ main {
 
 .form-container button:hover {
     background-color: #e67e22;
-}
-
-@media (max-width: 768px) {
-    header {
-        flex-direction: column;
-        align-items: flex-start;
-        height: auto; /* 작은 화면에서는 고정 높이를 제거 */
-    }
-    .right-side {
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-        padding: 10px;
-    }
-    .right-side button {
-        margin-right: 10px;
-    }
-
-    main {
-        padding-top: 200px; /* 작은 화면에서는 패딩 값을 더 크게 설정 */
-    }
 }
