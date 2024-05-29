@@ -1,7 +1,6 @@
 const OpenAI = require('openai');
-
 const openai = new OpenAI({
-    apiKey: "",
+    apiKey: process.env.OPEN_API_KEY,
 });
 
 //serverless-http 설정
