@@ -3,7 +3,7 @@ let userMessages = [];
 let assistantMessages = [];
 
 
-function start() {
+async function start() {
     const name = document.getElementById('name').value;
     const age = document.getElementById('age').value;
     const gender = document.getElementById('gender').value;
@@ -23,9 +23,7 @@ function start() {
 
     document.getElementById("intro").style.display = "none";
     document.getElementById("chat").style.display = "block";
-}
 
-async function sendMessage() {
     //로딩 아이콘 보여주기
     document.getElementById('loader').style.display = "block";
 
@@ -37,12 +35,9 @@ async function sendMessage() {
     //사용자의 메시지 가져옴
     // const messageInput = document.getElementById('messageInput');
     // const message = messageInput.value;  
-    
-    //Push
-    userMessages.push(messageInput.value);
 
     //입력 필드 초기화
-    messageInput.value = '';
+    //messageInput.value = '';
 
     //백엔드 서버에 메시지를 보내고 응답 출력
     try {
@@ -87,3 +82,4 @@ async function sendMessage() {
         console.error('Error:', error);
     }
 }
+
