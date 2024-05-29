@@ -43,20 +43,38 @@
             
             <button onclick="start()">동화책 생성하기</button>
         </div>
-
+        
         <div id="chat" class="chat-container" style="display: none;">
-            <div class="chat-bubble user-bubble">
-                안녕하세요! 동화책 생성을 요청하세요
-            </div>
             <div class="chat-bubble bot-bubble" id="fortuneResponse">
                 <!-- The fortune response will appear here -->
             </div>
             <div id="loader" class="loader" style="display: none;">
                 <i class="loading-icon fas fa-spinner fa-spin"></i>
             </div>
-            <input type="text" class="chat-input" id="messageInput" placeholder="메시지를 입력하세요...">
-            <button class="send-button" onclick="sendMessage()">보내기</button>
+
+            <section>
+                <form id="image-form">
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="text"
+                        placeholder="이미지 설명 입력" />
+                    <button type="submit">이미지 생성</button>
+                </form>
+            </section>
+
+            <section class = "image">
+                <figure>
+                    <img src="" alt="" id="image" />
+                </figure>
+                <!-- <p class = "loading">이미지 생성 중...</p> -->
+            </section>
         </div>
+
         <script src="script.js"></script>
     </body>
 </html>
+
+
+
+        
