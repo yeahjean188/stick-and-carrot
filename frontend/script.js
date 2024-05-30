@@ -73,7 +73,9 @@ async function start() {
         botBubble.textContent = word;
         document.getElementById('fortuneResponse').appendChild(botBubble);
 
+        //이미지 생성 요청 함수
         //dall.e 불러오기
+        showLoading();
         const d_response = await fetch('/generate', {
             method: 'POST',
             headers: {
@@ -90,43 +92,18 @@ async function start() {
         console.log(d_data)
         const imageUrl = d_data.data;
         document.querySelector('#image').src = imageUrl;
+        removeLoading();
         
     } catch (error) {
         console.error('Error:', error);
     }
 }
 
-
-// function onSubmit(e) {
-//     e.preventDefault();
-//     document.querySelector('#image').src = '';
-
-//     // 입력 텍스트
-//     const text = document.querySelector('#text').value;
-//     // 입력이 없는 경우
-//     if(text == '') return;
-//     generateImageRequest(text);
-// }
-
-// // 전송 버튼 이벤트
-// document.querySelector('#image-form').addEventListener('submit', onSubmit);
-
-// 이미지 생성 요청 함수
-// async function generateImageRequest(word) {
-//     const response = await fetch('/generate', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify({text: word})
-//     })
-
-//     if(!response.ok) {
-//         throw new Error('이미지 생성 오류')
-//     }
-
-//     const data = await response.json();
-//     console.log(data)
-//     const imageUrl = data.data;
-//     document.querySelector('#image').src = imageUrl;
-// }
+//로딩 첵스트 표시
+function showLoading(){
+    document.querySelector('.loading').classList.add('show');
+}
+//로딩 텍스트 비표시
+function removeLoading(){
+    document.querySelector('.loading').classList.remove('show');
+}
