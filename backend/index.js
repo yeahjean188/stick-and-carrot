@@ -25,44 +25,11 @@ const openai = new OpenAI({
     apiKey: process.env.OPEN_API_KEY,
 });
 
-// const {Configuration, OpenAI} = require("openai");
-// const configuration = new Configuration({
-//     apiKey: process.env.OPEN_API_KEY,
-// });
-// const openai = new OpenAI(configuration);
 
-//Image Generate Function
-const generateImage = async (req, res) => {
-    const {text} = req.body;
-    const response = await openai.images.generate({
-        //openai.createImage가 원래
-        model: 'dall-e-3',
-        prompt: text,
-        n: 1,
-        size: "1024x1024",
-    })
-    //console.log("response", response);
-    const url = response.data.url;
-    console.log("url", url);
-
-    // 데이터 구조 확인 및 방어적 접근
-    const image_url = response.data.data[0].url;
-    //const image_url = response.data.data[0].url;
-    //이미지 응답
-    res.json({data: image_url});
-}
-//generateImage();
-
-//HOME
-// app.get('/fortuneTell', async function (req, res) {
-//     res.render('index.html')
-// })
 app.get('/', (req, res) => {
     res.render('index.html')
 })
 
-//Image Generator(Post)
-app.post('/generate', generateImage);
 
 //POST 요청
 app.post('/fortuneTell', async function (req, res) {

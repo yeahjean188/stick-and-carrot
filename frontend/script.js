@@ -27,12 +27,6 @@ async function start() {
 
     //동화책 생성 자동화 입력
     const message = '동화책 생성해줘';  
-
-    //채팅 말풍선에 사용자의 메시지 출력
-    // const userBubble = document.createElement('div');
-    // userBubble.className = 'chat-bubble user-bubble';
-    // userBubble.textContent = message;
-    // document.getElementById('fortuneResponse').appendChild(userBubble);
     
     //Push
     userMessages.push(message);
@@ -81,50 +75,5 @@ async function start() {
     }
 }
 
-function onSubmit(e) {
-    e.preventDefault(); 
-    document.querySelector('#image').src='';
 
-    //입력 테스트
-    const text = document.querySelector('#text').value;
-    //입력이 없는 경우
-    if(text === '') return;
-    generateImageRequest(text);
-}
 
-// 전송 버튼 이벤트
-document.querySelector('#image-form').addEventListener('submit', onSubmit);
-
-// 이미지 생성 요청 함수
-async function generateImageRequest(text) {
-    try {
-        const response = await fetch('http://localhost:3000/generate', {             
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ text: text }) // 'text' is the prompt
-        });
-    
-        if (!response.ok) {
-            throw new Error('이미지 생성 오류');
-        }
-    
-        const data = await response.json();
-        console.log(data);
-    
-        // Assuming the response contains the image URL in data.imageUrl
-        //const imageUrl = data.data; //원래 data.imageUrl이었음
-        //const imageUrl = data?.data;
-        const imageUrl = response?.data?.[0]?.url;
-        console.log(imageUrl);
-        
-        if (!imageUrl) {
-            throw new Error('이미지 URL이 정의되지 않았습니다');
-        }
-
-        document.querySelector('#image').src = imageUrl; // Set the image source to the generated image URL
-    } catch (error) {
-        console.error("Error generating image:", error);
-    }
-}
