@@ -73,7 +73,7 @@ async function start() {
         botBubble.textContent = word;
         document.getElementById('fortuneResponse').appendChild(botBubble);
 
-
+        //dall.e 불러오기
         const d_response = await fetch('/generate', {
             method: 'POST',
             headers: {
