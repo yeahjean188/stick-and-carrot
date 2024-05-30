@@ -2,15 +2,25 @@
 const dotenv = require('dotenv').config();
 
 //port 설정
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3002;
 
 //express 설정
-const express = require('express')
-const app = express()
+const express = require('express');
+const app = express();
 
 //CORS 문제 해결
-const cors = require('cors')
-app.use(cors())
+const cors = require('cors');
+//app.use(cors());
+// 모든 경로에 대한 OPTIONS 요청을 허용
+//app.options('*', cors());
+
+const corsOptions = {
+    origin: '*', // 또는 허용할 출처를 명시할 수 있습니다
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
+}
+app.use(cors(corsOptions));
 
 //path 설정
 const path = require('path');
@@ -18,17 +28,51 @@ const path = require('path');
 //POST 요청 받을 수 있게 만듦
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: false })) // for parsing application/x-www-form-urlencoded
-app.use(express.static(path.join(__dirname, 'frontend')));
+app.use(express.static(path.join(__dirname, '../frontend')));
 
 const OpenAI = require('openai');
 const openai = new OpenAI({
     apiKey: process.env.OPEN_API_KEY,
 });
 
+//Image Generate Function
 
-app.get('/', (req, res) => {
-    res.render('index.html')
-})
+// const generateImage = async (req, res) => {
+//     try {
+//         const {text} = req.body;
+//         console.log(text)
+
+//         const response = await openai.images.generate({
+//             prompt: text,
+//             n: 1,
+//             size: "512x512",
+//         });
+
+//         // 응답 데이터 구조 확인
+//         //console.log(response);
+
+//         if (response && response.data && response.data.length > 0 && response.data[0].url) {
+//             const image_url = response.data[0].url;
+//             res.json({ data: image_url });
+//         } else {
+//             res.status(400).json({ error: "No image data available" });
+//         }
+//     } catch (error) {
+//         console.error("Error generating image:", error);
+//         res.status(500).json({ error: "Failed to generate image" });
+//     }
+// }
+
+//HOME
+// app.get('/', (req, res) => {
+//     //res.render('index.html');
+//     res.sendFile(path.join(__dirname, '../frontend', 'index.html'));
+// })
+
+//Image Generator(post)
+
+// app.post('/generate', generateImage);
+
 
 
 //POST 요청

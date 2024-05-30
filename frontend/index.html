@@ -54,25 +54,21 @@
 
             <section>
                 <form id="image-form">
-                    <input
-                        type="text"
-                        class="form-control"
-                        id="text"
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="text"
                         placeholder="이미지 설명 입력" />
-                    <button type="submit">이미지 생성</button>
+                    </div>
+                    <button type="submit" class="btn btn-primary">생성하기</button>
                 </form>
             </section>
 
-            <section class = "image">
+            <section class="image">
+                <h2 class="msg"></h2>
                 <figure>
                     <img src="" alt="" id="image" />
                 </figure>
-                <!-- <p class = "loading">이미지 생성 중...</p> -->
+                <p class="loading">이미지 생성 중...</p>
             </section>
-
-            <footer>
-                <p><a href="https://beta.openai.com/docs" target="_blank">Powered By OpenAI</a></p>
-            </footer>
         </div>
         <script src="./script.js"></script>
     </body>
