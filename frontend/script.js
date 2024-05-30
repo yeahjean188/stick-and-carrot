@@ -18,8 +18,9 @@ async function start() {
     myHateFood = hateFood;
     myStoryContent = storyContent;
 
-    document.getElementById("intro").style.display = "none";
-    document.getElementById("chat").style.display = "block";
+    //document.getElementById("intro").style.display = "none";
+    //document.getElementById("chat").style.display = "block";
+
 
     //로딩 아이콘 보여주기
     document.getElementById('loader').style.display = "block";
@@ -74,40 +75,37 @@ async function start() {
     }
 }
 
-// function onSubmit(e) {
-//     e.preventDefault();
-//     document.querySelector('#image').src = '';
 
-//     // 입력 텍스트
-//     const text = document.querySelector('#text').value;
-//     // 입력이 없는 경우
-//     if(text == '') return;
-//     generateImageRequest(text);
-// }
+function onSubmit(e) {
+    e.preventDefault();
+    document.querySelector('#image').src = '';
+
+    // 입력 텍스트
+    const text = document.querySelector('#text').value;
+    // 입력이 없는 경우
+    if(text == '') return;
+    generateImageRequest(text);
+}
 
 // 전송 버튼 이벤트
-
-//document.querySelector('#image-form').addEventListener('submit', onSubmit);
+document.querySelector('#image-form').addEventListener('submit', onSubmit);
 
 // 이미지 생성 요청 함수
+async function generateImageRequest(text) {
+    const response = await fetch('/generate', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({text: text})
+    })
 
-// async function generateImageRequest(text) {
-//     const response = await fetch('/generate', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify({text: text})
-//     })
+    if(!response.ok) {
+        throw new Error('이미지 생성 오류')
+    }
 
-//     if(!response.ok) {
-//         throw new Error('이미지 생성 오류')
-//     }
-
-//     const data = await response.json();
-//     console.log(data)
-//     const imageUrl = data.data;
-//     document.querySelector('#image').src = imageUrl;
-// }
-
-
+    const data = await response.json();
+    console.log(data)
+    const imageUrl = data.data;
+    document.querySelector('#image').src = imageUrl;
+}

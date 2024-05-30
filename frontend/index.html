@@ -44,32 +44,33 @@
             <button onclick="start()">동화책 생성하기</button>
         </div>
 
-        <div id="chat" class="chat-container" style="display: none;">
+        <div id="chat" class="chat-container" style="display: block;">
             <div class="chat-bubble bot-bubble" id="fortuneResponse">
                 <!-- The fortune response will appear here -->
             </div>
             <div id="loader" class="loader" style="display: none;">
                 <i class="loading-icon fas fa-spinner fa-spin"></i>
             </div>
-
-            <section>
-                <form id="image-form">
-                    <div class="mb-3">
-                        <input type="text" class="form-control" id="text"
-                        placeholder="이미지 설명 입력" />
-                    </div>
-                    <button type="submit" class="btn btn-primary">생성하기</button>
-                </form>
-            </section>
-
-            <section class="image">
-                <h2 class="msg"></h2>
-                <figure>
-                    <img src="" alt="" id="image" />
-                </figure>
-                <p class="loading">이미지 생성 중...</p>
-            </section>
         </div>
+
+        <section>
+            <form id="image-form">
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="text"
+                    placeholder="이미지 설명 입력" />
+                </div>
+                <button type="submit" class="btn btn-primary">생성하기</button>
+            </form>
+        </section>
+        
+        <section class="image">
+            <h2 class="msg"></h2>
+            <figure>
+                <img src="" alt="" id="image" />
+            </figure>
+            <p class="loading">이미지 생성 중...</p>
+        </section>
+        
         <script src="./script.js"></script>
     </body>
 </html>

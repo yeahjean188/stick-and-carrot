@@ -11,16 +11,6 @@ const app = express();
 //CORS 문제 해결
 const cors = require('cors');
 app.use(cors());
-// 모든 경로에 대한 OPTIONS 요청을 허용
-//app.options('*', cors());
-
-// const corsOptions = {
-//     origin: '*', // 또는 허용할 출처를 명시할 수 있습니다
-//     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
-//     preflightContinue: false,
-//     optionsSuccessStatus: 204,
-// }
-// app.use(cors(corsOptions));
 
 //path 설정
 const path = require('path');
@@ -35,47 +25,7 @@ const openai = new OpenAI({
     apiKey: process.env.OPEN_API_KEY,
 });
 
-//Image Generate Function
-
-// const generateImage = async (req, res) => {
-//     try {
-//         const {text} = req.body;
-//         console.log(text)
-
-//         const response = await openai.images.generate({
-//             prompt: text,
-//             n: 1,
-//             size: "512x512",
-//         });
-
-//         // 응답 데이터 구조 확인
-//         //console.log(response);
-
-//         if (response && response.data && response.data.length > 0 && response.data[0].url) {
-//             const image_url = response.data[0].url;
-//             res.json({ data: image_url });
-//         } else {
-//             res.status(400).json({ error: "No image data available" });
-//         }
-//     } catch (error) {
-//         console.error("Error generating image:", error);
-//         res.status(500).json({ error: "Failed to generate image" });
-//     }
-// }
-
-//HOME
-// app.get('/', (req, res) => {
-//     //res.render('index.html');
-//     res.sendFile(path.join(__dirname, '../frontend', 'index.html'));
-// })
-
-//Image Generator(post)
-
-// app.post('/generate', generateImage);
-
-
-
-//POST 요청
+//gpt POST 요청
 app.post('/fortuneTell', async function (req, res) {
 
     //프론트엔드에서 보낸 메시지 출력
@@ -112,6 +62,46 @@ app.post('/fortuneTell', async function (req, res) {
 
     res.json({ "assistant": fortune });
 });
+
+
+
+
+//Image Generate Function
+const generateImage = async (req, res) => {
+    try {
+        const {text} = req.body;
+        console.log(text)
+
+        const response = await openai.images.generate({
+            prompt: text,
+            n: 1,
+            size: "512x512",
+        });
+
+        // 응답 데이터 구조 확인
+        //console.log(response);
+
+        if (response && response.data && response.data.length > 0 && response.data[0].url) {
+            const image_url = response.data[0].url;
+            res.json({ data: image_url });
+        } else {
+            res.status(400).json({ error: "No image data available" });
+        }
+    } catch (error) {
+        console.error("Error generating image:", error);
+        res.status(500).json({ error: "Failed to generate image" });
+    }
+}
+
+//HOME
+app.get('/', (req, res) => {
+    //res.render('index.html');
+    res.sendFile(path.join(__dirname, '../frontend', 'index.html'));
+})
+
+//Image Generator(post)
+app.post('/generate', generateImage);
+
 
 //app.listen(3000)
 app.listen(port, () => {
