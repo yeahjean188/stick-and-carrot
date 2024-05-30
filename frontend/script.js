@@ -18,8 +18,10 @@ async function start() {
     myHateFood = hateFood;
     myStoryContent = storyContent;
 
-    //document.getElementById("intro").style.display = "none";
-    //document.getElementById("chat").style.display = "block";
+    document.getElementById("intro").style.display = "none";
+    document.getElementById("chat").style.display = "block";
+    document.getElementById("dalle-input").style.display = "block";
+    document.getElementById("dalle-image").style.display = "block";
 
 
     //로딩 아이콘 보여주기
