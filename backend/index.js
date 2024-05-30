@@ -10,17 +10,17 @@ const app = express();
 
 //CORS 문제 해결
 const cors = require('cors');
-//app.use(cors());
+app.use(cors());
 // 모든 경로에 대한 OPTIONS 요청을 허용
 //app.options('*', cors());
 
-const corsOptions = {
-    origin: '*', // 또는 허용할 출처를 명시할 수 있습니다
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
-    preflightContinue: false,
-    optionsSuccessStatus: 204,
-}
-app.use(cors(corsOptions));
+// const corsOptions = {
+//     origin: '*', // 또는 허용할 출처를 명시할 수 있습니다
+//     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+//     preflightContinue: false,
+//     optionsSuccessStatus: 204,
+// }
+// app.use(cors(corsOptions));
 
 //path 설정
 const path = require('path');

@@ -32,7 +32,7 @@ async function start() {
 
     //백엔드 서버에 메시지를 보내고 응답 출력
     try {
-        const response = await fetch('http://localhost:3000/fortuneTell', {
+        const response = await fetch('http://localhost:3002/fortuneTell', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
