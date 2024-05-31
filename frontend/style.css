@@ -67,6 +67,13 @@ body {
     text-align: center;
 }
 
+#dalle-image{
+    text-align: center;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+}
+
 .intro-container h1,
 .intro-container img,
 .intro-container input,
