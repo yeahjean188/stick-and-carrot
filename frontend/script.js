@@ -107,9 +107,9 @@ async function next() {
     //document.getElementById('loader').style.display = "block";
 
     //1페이지 글 불러오기
-    const backstory = backcontent;
+    const backcontent2 = backcontent;
     // 동화책 이어서 생성 자동화 입력
-    const message = `다음 이야기를 이어서 써줘: ${backstory}`;  
+    const message = `다음 이야기를 이어서 써줘: ${backcontent2}`;  
     // Push
     userMessages.push(message);
 
@@ -145,12 +145,12 @@ async function next() {
         console.log('Response:', data);
 
         // GPT 응답 내용을 변수 backcontent에 저장
-        backstory = data.assistant;
+        nextstory = data.assistant;
 
         //2페이지 글 공간에 backstory 집어넣기
         const botBubble = document.createElement('div');
         botBubble.className = 'chat-bubble bot-bubble';
-        botBubble.textContent = backstory;
+        botBubble.textContent = nextstory;
         document.getElementById('fortuneResponse2').appendChild(botBubble);
     }
     catch (error) {
