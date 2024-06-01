@@ -79,6 +79,13 @@ body {
     align-items: center; */
 }
 
+#dalle-image2{
+    text-align: center;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+}
+
 .intro-container h1,
 .intro-container img,
 .intro-container input,
@@ -120,5 +127,12 @@ input[type="radio"] {
     display: none;
 }
 .loading.show{
+    display: block;
+}
+
+.loading2{
+    display: none;
+}
+.loading2.show{
     display: block;
 }

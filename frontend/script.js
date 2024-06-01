@@ -15,6 +15,8 @@ async function start() {
     document.getElementById("intro").style.display = "none";
     document.getElementById("chat").style.display = "block";
     document.getElementById("dalle-image").style.display = "block";
+    // document.getElementById("chat2").style.display = "block";
+    // document.getElementById("dalle-image2").style.display = "block";
 
 
     //로딩 아이콘 보여주기
@@ -93,7 +95,7 @@ async function start() {
     }
 }
 
-//로딩 첵스트 표시
+//로딩 텍스트 표시
 function showLoading(){
     document.querySelector('.loading').classList.add('show');
 }
@@ -109,12 +111,12 @@ async function next() {
     //1페이지 글 불러오기
     const backcontent2 = backcontent;
     // 동화책 이어서 생성 자동화 입력
-    const message = `다음 이야기를 이어서 써줘: ${backcontent2}`;  
+    const message2 = `다음 이야기를 이어서 써줘: ${backcontent2}`;  
     // Push
-    userMessages.push(message);
+    userMessages.push(message2);
 
     try{
-        const response = await fetch('http://localhost:3002/fortuneTell', {
+        const response2 = await fetch('http://localhost:3002/fortuneTell', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -131,29 +133,59 @@ async function next() {
             })
         });
 
-        if (!response.ok) {
-            throw new Error('Request failed with status ' + response.status);
+        if (!response2.ok) {
+            throw new Error('Request failed with status ' + response2.status);
         }
 
-        const data = await response.json();
+        const data2 = await response2.json();
         
         //로딩 아이콘 숨기기
         document.getElementById('loader2').style.display = "none";
         
         //Push
-        assistantMessages.push(data.assistant);
-        console.log('Response:', data);
+        assistantMessages.push(data2.assistant);
+        console.log('Response:', data2);
 
-        // GPT 응답 내용을 변수 backcontent에 저장
-        nextstory = data.assistant;
+        // GPT 응답 내용을 변수 nextstory에 저장
+        nextstory = data2.assistant;
 
         //2페이지 글 공간에 backstory 집어넣기
         const botBubble = document.createElement('div');
         botBubble.className = 'chat-bubble bot-bubble';
         botBubble.textContent = nextstory;
         document.getElementById('fortuneResponse2').appendChild(botBubble);
+
+        //이미지 생성 요청 함수
+        //dall.e 불러오기
+        showLoading2();
+        const d2_response = await fetch('/generate', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({text: nextstory})
+        })
+    
+        if(!d2_response.ok) {
+            throw new Error('이미지 생성 오류')
+        }
+    
+        const d2_data = await d2_response.json();
+        console.log(d2_data)
+        const imageUrl2 = d2_data.data;
+        document.querySelector('#image2').src = imageUrl2;
+        removeLoading2();
     }
     catch (error) {
         console.error('Error:', error);
     }
+}
+
+//로딩 텍스트 표시
+function showLoading2(){
+    document.querySelector('.loading2').classList.add('show');
+}
+//로딩 텍스트 비표시
+function removeLoading2(){
+    document.querySelector('.loading2').classList.remove('show');
 }
