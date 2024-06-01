@@ -64,7 +64,6 @@ app.post('/fortuneTell', async function (req, res) {
 
 
 
-
 //Image Generate Function
 const generateImage = async (req, res) => {
     try {

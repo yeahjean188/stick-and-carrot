@@ -67,6 +67,11 @@ body {
     text-align: center;
 }
 
+#loader2{
+    font-size: 25px;
+    text-align: center;
+}
+
 #dalle-image{
     text-align: center;
     /* display: flex;

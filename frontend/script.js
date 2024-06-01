@@ -2,7 +2,7 @@
 let userMessages = [];
 let assistantMessages = [];
 let myName, myAge, myLike, myHateFood, myStoryContent;
-let backcontent;
+let backcontent, nextstory;
 
 async function start() {
     myName = document.getElementById('name').value;
@@ -56,7 +56,7 @@ async function start() {
         
         //Push
         assistantMessages.push(data.assistant);
-        console.log('Response:', data);
+        //console.log('Response:', data);
 
         // GPT 응답 내용을 변수 word에 저장
         backcontent = data.assistant;
@@ -104,7 +104,7 @@ function removeLoading(){
 
 async function next() {
     // 로딩 아이콘 보여주기 (두 번째 챗 컨테이너에서)
-    //document.getElementById('loader').style.display = "block";
+    document.getElementById('loader2').style.display = "block";
 
     //1페이지 글 불러오기
     const backcontent2 = backcontent;
@@ -138,7 +138,7 @@ async function next() {
         const data = await response.json();
         
         //로딩 아이콘 숨기기
-        //document.getElementById('loader').style.display = "none";
+        document.getElementById('loader2').style.display = "none";
         
         //Push
         assistantMessages.push(data.assistant);
