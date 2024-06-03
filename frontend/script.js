@@ -22,7 +22,7 @@ async function start() {
     document.getElementById('loader').style.display = "block";
 
     //동화책 생성 자동화 입력
-    const message = '동화책 생성해줘';  
+    const message = 'Please create a children book with less than 400 characters in English.';  
     
     //Push
     userMessages.push(message);
@@ -127,13 +127,11 @@ async function next() {
         const backcontent2 = backcontent;
         let message2;
         // 동화책 이어서 생성 자동화 입력 : 페이지에 맞게 작성, 마지막 페이지 이후에는 솔루션 프롬프트로 넣기
-        if(nextCallCount<=3){
+        if(nextCallCount<=4){
             const n = nextCallCount;
-            message2 = `총 4페이지 중 ${n}번째에 해당하는, '${backcontent2}' 다음 이야기를 써줘.`;  
-        }else if (nextCallCount>3){
-            message2 = `'${backcontent2}' 다음 이야기를 쓰면서 이야기를 마무리 지어줘.`;
-        }else {
-            message2 = `${myHateFood}를 잘 먹을 수 있는 레시피를 한글로 소개해줘.`;
+            message2 = `Write the ${n}th story out of a total of five pages. It's the backstory of '${backcontent2}'.`;  
+        }else{
+            message2 = `'${backcontent2}' Please wrap up the story by writing the following story.`;
         }
         console.log(nextCallCount);
 
@@ -206,7 +204,7 @@ async function next() {
         catch (error) {
             console.error('Error:', error);
         }
-    }else {
+    } else {
         document.getElementById("chat2").style.display = "none";
         document.getElementById("dalle-image2").style.display = "none";
         document.getElementById("chat").style.display = "none";
@@ -215,6 +213,78 @@ async function next() {
         // 세 번째 호출 시 다른 div로 이동
         document.getElementById("chat3").style.display = "block";
         //document.getElementById("dalle-image3").style.display = "block";
+
+        message2 = `Please introduce a recipe that I can eat ${myHateFood} well`;
+        // Push
+        userMessages.push(message2);
+
+        try{
+            const response2 = await fetch('http://localhost:3002/fortuneTell', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    myName: myName,
+                    myAge: myAge,
+                    myGender: myGender,
+                    myLike: myLike,
+                    myHateFood: myHateFood,
+                    myStoryContent: myStoryContent,
+                    userMessages: userMessages,
+                    assistantMessages: assistantMessages,
+                })
+            });
+
+            if (!response2.ok) {
+                throw new Error('Request failed with status ' + response2.status);
+            }
+
+            const data3 = await response2.json();
+            
+            //로딩 아이콘 숨기기
+            //document.getElementById('loader2').style.display = "none";
+            
+            //Push
+            assistantMessages.push(data3.assistant);
+            nextstory = data3.assistant;
+            backcontent = nextstory; //backcontent를 업데이트합니다.
+            console.log('Response:', data3);
+
+            // GPT 응답 내용을 변수 nextstory에 저장
+            nextstory = data3.assistant;
+
+            //2페이지 글 공간에 backstory 집어넣기
+            const botBubble = document.createElement('div');
+            botBubble.className = 'chat-bubble bot-bubble';
+            botBubble.textContent = nextstory;
+            document.getElementById('fortuneResponse3').appendChild(botBubble);
+
+            //이미지 생성 요청 함수
+            //dall.e 불러오기
+            
+            // showLoading2();
+            // const d2_response = await fetch('/generate', {
+            //     method: 'POST',
+            //     headers: {
+            //         'Content-Type': 'application/json',
+            //     },
+            //     body: JSON.stringify({text: nextstory})
+            // })
+        
+            // if(!d2_response.ok) {
+            //     throw new Error('이미지 생성 오류')
+            // }
+        
+            // const d2_data = await d2_response.json();
+            // console.log(d2_data)
+            // const imageUrl2 = d2_data.data;
+            // document.querySelector('#image2').src = imageUrl2;
+            // removeLoading2();
+        }
+        catch (error) {
+            console.error('Error:', error);
+        }
     }
 }
 

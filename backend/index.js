@@ -32,11 +32,11 @@ app.post('/fortuneTell', async function (req, res) {
     let { myName, myAge, myGender, myLike, myHateFood, myStoryContent, userMessages, assistantMessages } = req.body
 
     let messages = [
-        { "role": "system", "content": "You can create English fairy tales for seven to 11 years.Provides only the introduction of fairy tale books.The article is written in English." },
-        { "role": "system", "content": "The volume is 400 characters including spaces in English." },
-        { "role": "assistant", "content": "Considering your name, age, gender, interests, and picky ingredients, you can create an introduction to a 300-character English fairy tale book." },
-        { "role": "assistant", "content": `your name is ${myName}, your age is ${myAge}, your gender is ${myGender}. 
-        The story is about interested ${myLike} and helping you eat food you don't like ${myHateFood} well. the amount of writing is ${myStoryContent}.` }
+        { "role": "system", "content": "You can make English fairy tales for children." },
+        { "role": "system", "content": "You remember the contents of the previous page. You will continue writing the contents on the next page." },
+        { "role": "system", "content": "You only write one page of 400 characters in english. You can't move over that." },
+        { "role": "assistant", "content": `The name of the main character of the coin book is ${myName}, His age is ${myAge}, His gender is ${myGender}. 
+        The story is about interested ${myLike}. And You make up the story to eat well ${myHateFood} which is the food he hates. And the amount of writing is ${myStoryContent}.` }
     ]
 
     while (userMessages.length != 0 || assistantMessages.length != 0) {
