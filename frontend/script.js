@@ -1,54 +1,35 @@
 // 변수 생성
 let userMessages = [];
 let assistantMessages = [];
-let myDateTime = '';
+let myName, myAge, myLike, myHateFood, myStoryContent;
+let backcontent, nextstory;
+let nextCallCount = 1; // 호출 횟수를 추적하는 변수
 
-
-function start() {
-    const name = document.getElementById('name').value;
-    const age = document.getElementById('age').value;
-    const gender = document.getElementById('gender').value;
-    const like = document.getElementById('like').value;
-    const hateFood = document.getElementById('hateFood').value;
-    const storyContent = document.getElementById('storyContent').value;
-    // if (date === '') {
-    //     alert('생년월일을 입력해주세요.');
-    //     return;
-    // }
-    myName = name;
-    myAge = age;
-    myGender = gender;
-    myLike = like;
-    myHateFood = hateFood;
-    myStoryContent = storyContent;
+async function start() {
+    myName = document.getElementById('name').value;
+    myAge = document.getElementById('age').value;
+    myGender = document.getElementById('gender').value;
+    myLike = document.getElementById('like').value;
+    myHateFood = document.getElementById('hateFood').value;
+    myStoryContent = document.getElementById('storyContent').value;
 
     document.getElementById("intro").style.display = "none";
     document.getElementById("chat").style.display = "block";
-}
+    document.getElementById("dalle-image").style.display = "block";
+    document.getElementById("next").style.display = "block";
 
-async function sendMessage() {
     //로딩 아이콘 보여주기
     document.getElementById('loader').style.display = "block";
 
-    //사용자의 메시지 가져옴
-    const messageInput = document.getElementById('messageInput');
-    const message = messageInput.value;  
-
-    //채팅 말풍선에 사용자의 메시지 출력
-    const userBubble = document.createElement('div');
-    userBubble.className = 'chat-bubble user-bubble';
-    userBubble.textContent = message;
-    document.getElementById('fortuneResponse').appendChild(userBubble);
+    //동화책 생성 자동화 입력
+    const message = 'Please create a children book with less than 400 characters in English.';  
     
     //Push
-    userMessages.push(messageInput.value);
-
-    //입력 필드 초기화
-    messageInput.value = '';
+    userMessages.push(message);
 
     //백엔드 서버에 메시지를 보내고 응답 출력
     try {
-        const response = await fetch('https://mxewedwbxdnjndefvix4t2njca0wvqrx.lambda-url.ap-northeast-2.on.aws/fortuneTell', {
+        const response = await fetch('http://localhost:3002/fortuneTell', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -76,16 +57,242 @@ async function sendMessage() {
         
         //Push
         assistantMessages.push(data.assistant);
-        console.log('Response:', data);
+        //console.log('Response:', data);
+
+        // GPT 응답 내용을 변수 word에 저장
+        backcontent = data.assistant;
 
         //채팅 말풍선에 챗GPT 응답 출력
         const botBubble = document.createElement('div');
         botBubble.className = 'chat-bubble bot-bubble';
-        botBubble.textContent = data.assistant;
+        botBubble.textContent = backcontent;
         document.getElementById('fortuneResponse').appendChild(botBubble);
-        
+
+        //이미지 생성 요청 함수
+        //dall.e 불러오기
+        showLoading();
+        const d_response = await fetch('/generate', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({text: backcontent})
+        })
     
+        if(!d_response.ok) {
+            throw new Error('이미지 생성 오류')
+        }
+    
+        const d_data = await d_response.json();
+        console.log(d_data)
+        const imageUrl = d_data.data;
+        document.querySelector('#image').src = imageUrl;
+        removeLoading();
+        
     } catch (error) {
         console.error('Error:', error);
     }
+}
+
+//로딩 텍스트 표시
+function showLoading(){
+    document.querySelector('.loading').classList.add('show');
+}
+//로딩 텍스트 비표시
+function removeLoading(){
+    document.querySelector('.loading').classList.remove('show');
+}
+
+async function next() {
+    myHateFood = document.getElementById('hateFood').value;
+    nextCallCount++; // 함수 호출 시마다 카운트 증가
+
+    if (nextCallCount <= 5){
+        document.getElementById("chat2").style.display = "block";
+        document.getElementById("dalle-image2").style.display = "block";
+        document.getElementById("chat").style.display = "none";
+        document.getElementById("dalle-image").style.display = "none";
+
+        if(nextCallCount>2){
+            // 이전 글 지우기
+            document.getElementById('fortuneResponse2').innerHTML = "";
+            // 이전 그림 지우기
+            document.querySelector('#image2').src = "";
+        }
+
+        // 로딩 아이콘 보여주기 (두 번째 챗 컨테이너에서)
+        document.getElementById('loader2').style.display = "block";
+
+        //이전 페이지 글 불러오기
+        const backcontent2 = backcontent;
+        let message2;
+        // 동화책 이어서 생성 자동화 입력 : 페이지에 맞게 작성, 마지막 페이지 이후에는 솔루션 프롬프트로 넣기
+        if(nextCallCount<=4){
+            const n = nextCallCount;
+            message2 = `Write the ${n}th story out of a total of five pages. It's the backstory of '${backcontent2}'.`;  
+        }else{
+            message2 = `'${backcontent2}' Please wrap up the story by writing the following story.`;
+        }
+        console.log(nextCallCount);
+
+        // Push
+        userMessages.push(message2);
+
+        try{
+            const response2 = await fetch('http://localhost:3002/fortuneTell', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    myName: myName,
+                    myAge: myAge,
+                    myGender: myGender,
+                    myLike: myLike,
+                    myHateFood: myHateFood,
+                    myStoryContent: myStoryContent,
+                    userMessages: userMessages,
+                    assistantMessages: assistantMessages,
+                })
+            });
+
+            if (!response2.ok) {
+                throw new Error('Request failed with status ' + response2.status);
+            }
+
+            const data2 = await response2.json();
+            
+            //로딩 아이콘 숨기기
+            document.getElementById('loader2').style.display = "none";
+            
+            //Push
+            assistantMessages.push(data2.assistant);
+            nextstory = data2.assistant;
+            backcontent = nextstory; //backcontent를 업데이트합니다.
+            console.log('Response:', data2);
+
+            // GPT 응답 내용을 변수 nextstory에 저장
+            nextstory = data2.assistant;
+
+            //2페이지 글 공간에 backstory 집어넣기
+            const botBubble = document.createElement('div');
+            botBubble.className = 'chat-bubble bot-bubble';
+            botBubble.textContent = nextstory;
+            document.getElementById('fortuneResponse2').appendChild(botBubble);
+
+            //이미지 생성 요청 함수
+            //dall.e 불러오기
+            showLoading2();
+            const d2_response = await fetch('/generate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({text: nextstory})
+            })
+        
+            if(!d2_response.ok) {
+                throw new Error('이미지 생성 오류')
+            }
+        
+            const d2_data = await d2_response.json();
+            console.log(d2_data)
+            const imageUrl2 = d2_data.data;
+            document.querySelector('#image2').src = imageUrl2;
+            removeLoading2();
+        }
+        catch (error) {
+            console.error('Error:', error);
+        }
+    } else {
+        document.getElementById("chat2").style.display = "none";
+        document.getElementById("dalle-image2").style.display = "none";
+        document.getElementById("chat").style.display = "none";
+        document.getElementById("dalle-image").style.display = "none";
+
+        // 세 번째 호출 시 다른 div로 이동
+        document.getElementById("chat3").style.display = "block";
+        //document.getElementById("dalle-image3").style.display = "block";
+
+        message2 = `Please introduce a recipe that I can eat ${myHateFood} well`;
+        // Push
+        userMessages.push(message2);
+
+        try{
+            const response2 = await fetch('http://localhost:3002/fortuneTell', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    myName: myName,
+                    myAge: myAge,
+                    myGender: myGender,
+                    myLike: myLike,
+                    myHateFood: myHateFood,
+                    myStoryContent: myStoryContent,
+                    userMessages: userMessages,
+                    assistantMessages: assistantMessages,
+                })
+            });
+
+            if (!response2.ok) {
+                throw new Error('Request failed with status ' + response2.status);
+            }
+
+            const data3 = await response2.json();
+            
+            //로딩 아이콘 숨기기
+            //document.getElementById('loader2').style.display = "none";
+            
+            //Push
+            assistantMessages.push(data3.assistant);
+            nextstory = data3.assistant;
+            backcontent = nextstory; //backcontent를 업데이트합니다.
+            console.log('Response:', data3);
+
+            // GPT 응답 내용을 변수 nextstory에 저장
+            nextstory = data3.assistant;
+
+            //2페이지 글 공간에 backstory 집어넣기
+            const botBubble = document.createElement('div');
+            botBubble.className = 'chat-bubble bot-bubble';
+            botBubble.textContent = nextstory;
+            document.getElementById('fortuneResponse3').appendChild(botBubble);
+
+            //이미지 생성 요청 함수
+            //dall.e 불러오기
+            
+            // showLoading2();
+            // const d2_response = await fetch('/generate', {
+            //     method: 'POST',
+            //     headers: {
+            //         'Content-Type': 'application/json',
+            //     },
+            //     body: JSON.stringify({text: nextstory})
+            // })
+        
+            // if(!d2_response.ok) {
+            //     throw new Error('이미지 생성 오류')
+            // }
+        
+            // const d2_data = await d2_response.json();
+            // console.log(d2_data)
+            // const imageUrl2 = d2_data.data;
+            // document.querySelector('#image2').src = imageUrl2;
+            // removeLoading2();
+        }
+        catch (error) {
+            console.error('Error:', error);
+        }
+    }
+}
+
+//로딩 텍스트 표시
+function showLoading2(){
+    document.querySelector('.loading2').classList.add('show');
+}
+//로딩 텍스트 비표시
+function removeLoading2(){
+    document.querySelector('.loading2').classList.remove('show');
 }

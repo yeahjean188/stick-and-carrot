@@ -2,6 +2,42 @@ body {
     font-family: Arial, sans-serif;
 }
 
+header {
+    background-color: white;
+    border-bottom: 2px solid white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+
+.right-side button {
+    padding: 12px 20px; /* 패딩을 늘려 버튼 크기를 크게 만듦 */
+    margin-right: 20px; /* 오른쪽 마진을 주어 다른 요소와 간격을 둠 */
+    background-color: white; /* 배경색을 흰색으로 설정 */
+    border: none; /* 테두리 제거 */
+    color: #E7480C; /* 글자색을 주황색으로 설정 */
+    font-size: 15px; /* 글자 크기를 늘림 */
+    cursor: pointer; /* 커서를 포인터로 설정 */
+    border-radius: 5px; /* 모서리를 둥글게 설정 */
+    font-weight: bold;
+}
+
+.right-side button:last-child {
+    margin-right: 50px; /* 마지막 버튼에 추가 마진 */
+}
+
+.right-side button:hover {
+    background-color: whitesmoke; /* 호버 시 더 어두운 흰색으로 변경 */
+}
+
+
 .chat-container {
     width: 100%;
     max-width: 500px;
@@ -50,35 +86,6 @@ body {
     margin-left: 5px;
 }
 
-.intro-container{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.intro-container img{
-    width: 20%;
-    min-width: 300px;
-}
-
-#loader{
-    font-size: 25px;
-    text-align: center;
-}
-
-.intro-container h1,
-.intro-container img,
-.intro-container input,
-.intro-container div {
-    margin-bottom: 20px; /* 각 요소 아래에 50px의 공간을 추가 */
-}
-
-/* 라디오 버튼이 포함된 div 내부 요소에 대한 스타일 */
-.intro-container div label,
-.intro-container div input {
-    margin-bottom: 0; /* div 내부 요소의 마진은 제거 */
-}
 
 /* 폼 요소 스타일링 (선택적) */
 input[type="text"],
@@ -103,3 +110,150 @@ input[type="radio"] {
     border-radius: 5px; /* 버튼 모서리 둥글게 */
     cursor: pointer; 
 }
+
+
+/* .intro-container */
+.intro-container{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 100px; /* 헤더 아래에 공간을 추가 */
+    display: flex;
+    align-items: center;
+}
+
+.intro-container img{
+    width: 20%;
+    min-width: 300px;
+}
+
+.intro-container h1,
+.intro-container img,
+.intro-container input,
+.intro-container div {
+    margin-bottom: 20px; 
+}
+
+/* 라디오 버튼이 포함된 div 내부 요소에 대한 스타일 */
+.intro-container div label,
+.intro-container div input {
+    margin-bottom: 0; /* div 내부 요소의 마진은 제거 */
+}
+
+
+/* .text-container */
+.text-container {
+    text-align: center;
+    margin-bottom: 20px; /* 텍스트 아래에 여백 추가 */
+    margin-top: -30px;
+}
+
+.text-container h1 {
+    font-size: 30px;
+    color: #E7480C;
+    margin-bottom: 10px;
+}
+
+.text-container h2 {
+    font-size: 16px;
+    color: #333;
+}
+
+/* div-container */
+.div-container {
+    width: 100%;
+    max-width: 600px;
+    max-height: 700px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: -20px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.div-container label {
+    margin-bottom: 5px;
+    font-size: 20px;
+    color: #333;
+    text-align: center;
+    font-weight: bold;
+}
+
+.div-container input {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.div-container select {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.div-container button {
+    padding: 12px 24px;
+    background-color: #E7480C;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.div-container button:hover {
+    background-color: #e67e22;
+}
+
+
+/* loader, loading */
+#loader{
+    font-size: 25px;
+    text-align: center;
+}
+
+#loader2{
+    font-size: 25px;
+    text-align: center;
+}
+.loading{
+    display: none;
+}
+.loading.show{
+    display: block;
+}
+
+.loading2{
+    display: none;
+}
+.loading2.show{
+    display: block;
+}
+
+/* dalle-image */
+#dalle-image{
+    text-align: center;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+}
+
+#dalle-image2{
+    text-align: center;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+}
+
+
+
