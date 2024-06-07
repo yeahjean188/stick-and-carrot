@@ -58,55 +58,58 @@
             </div>
         </div>
 
-        <div id="chat" class="chat-container" style="display: none;">
-            <div class="chat-bubble bot-bubble" id="fortuneResponse">
-                <!-- The fortune response will appear here -->
+        <div class="container">
+            <div id="chat" class="chat-container" style="display: none;">
+                <div class="chat-bubble bot-bubble" id="fortuneResponse">
+                    <!-- The fortune response will appear here -->
+                </div>
+                <div id="loader" class="loader" style="display: none;">
+                    <i class="loading-icon fas fa-spinner fa-spin"></i>
+                </div>
             </div>
-            <div id="loader" class="loader" style="display: none;">
-                <i class="loading-icon fas fa-spinner fa-spin"></i>
+            
+            <section id="dalle-image" style="display: none;">
+                <h2 class="msg"></h2>
+                <figure>
+                    <img src="" alt="" id="image" />
+                </figure>
+                <p class="loading">이미지 생성 중...</p>
+            </section>
+            
+            <!-- 두번째 장 만들기 -->
+            <button style="display: none;" onclick="next()" id="next">NEXT PAGE</button>
+
+            <div id="chat2" class="chat-container" style="display:none;">
+                <div class="chat-bubble bot-bubble" id="fortuneResponse2">
+                    <!-- The fortune response will appear here -->
+                </div>
+
+                <div id="loader2" class="loader2" style="display: none;">
+                    <i class="loading-icon fas fa-spinner fa-spin"></i>
+                </div>
+            </div>
+
+            <section id="dalle-image2" style="display: none;">
+                <h2 class="msg"></h2>
+                <figure>
+                    <img src="" alt="" id="image2" />
+                    <p class="loading2">이미지 생성 중...</p>
+                </figure>
+            </section>
+
+            
+            <!-- 마지막 장 만들기 -->
+            <div id="chat3" class="chat-container" style="display:none;">
+                <div class="chat-bubble bot-bubble" id="fortuneResponse3">
+                    <!-- The fortune response will appear here -->
+                </div>
+
+                <!-- <div id="loader2" class="loader2" style="display: none;">
+                    <i class="loading-icon fas fa-spinner fa-spin"></i>
+                </div> -->
             </div>
         </div>
-        
-        <section id="dalle-image" style="display: none;">
-            <h2 class="msg"></h2>
-            <figure>
-                <img src="" alt="" id="image" />
-            </figure>
-            <p class="loading">이미지 생성 중...</p>
-        </section>
-        
-        <!-- 두번째 장 만들기 -->
-        <button style="display: none;" onclick="next()" id="next">NEXT PAGE</button>
 
-        <div id="chat2" class="chat-container" style="display:none;">
-            <div class="chat-bubble bot-bubble" id="fortuneResponse2">
-                <!-- The fortune response will appear here -->
-            </div>
-
-            <div id="loader2" class="loader2" style="display: none;">
-                <i class="loading-icon fas fa-spinner fa-spin"></i>
-            </div>
-        </div>
-
-        <section id="dalle-image2" style="display: none;">
-            <h2 class="msg"></h2>
-            <figure>
-                <img src="" alt="" id="image2" />
-                <p class="loading2">이미지 생성 중...</p>
-            </figure>
-        </section>
-
-        
-        <!-- 마지막 장 만들기 -->
-        <div id="chat3" class="chat-container" style="display:none;">
-            <div class="chat-bubble bot-bubble" id="fortuneResponse3">
-                <!-- The fortune response will appear here -->
-            </div>
-
-            <!-- <div id="loader2" class="loader2" style="display: none;">
-                <i class="loading-icon fas fa-spinner fa-spin"></i>
-            </div> -->
-        </div>
 
         <script src="./script.js"></script>
     </body>
