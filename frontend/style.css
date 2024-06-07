@@ -2,17 +2,246 @@ body {
     font-family: Arial, sans-serif;
 }
 
+header {
+    background-color: white;
+    border-bottom: 2px solid white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    height: 30px;
+}
+
+
+.right-side button {
+    padding: 12px 20px; /* 패딩을 늘려 버튼 크기를 크게 만듦 */
+    margin-right: 20px; /* 오른쪽 마진을 주어 다른 요소와 간격을 둠 */
+    background-color: white; /* 배경색을 흰색으로 설정 */
+    border: none; /* 테두리 제거 */
+    color: #E7480C; /* 글자색을 주황색으로 설정 */
+    font-size: 15px; /* 글자 크기를 늘림 */
+    cursor: pointer; /* 커서를 포인터로 설정 */
+    border-radius: 5px; /* 모서리를 둥글게 설정 */
+    font-weight: bold;
+}
+
+.right-side button:last-child {
+    margin-right: 50px; /* 마지막 버튼에 추가 마진 */
+}
+
+.right-side button:hover {
+    background-color: whitesmoke; /* 호버 시 더 어두운 흰색으로 변경 */
+}
+
+
+
+/* 폼 요소 스타일링 (선택적) */
+input[type="text"],
+input[type="number"] {
+    width: 200px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+input[type="radio"] {
+    margin-right: 5px;
+}
+
+/* 글밥 드롭다운 뒤의 버튼에 대한 마진 설정 */
+#storyContent + button {
+    margin-top: 20px; /* 버튼 상단에 10px의 여유 공간 추가 */
+    padding: 12px 24px; /* 버튼의 패딩을 늘려 크기를 키움 */
+    background-color: #FF4500; /* 주황색 배경 */
+    color: white; /* 하얀색 글씨 */
+    font-size: 16px; /* 글씨 크기 */
+    border: none; /* 테두리 제거 */
+    border-radius: 20px; /* 버튼 모서리 둥글게 */
+    cursor: pointer;
+    font-weight: bold; 
+}
+
+#storyContent + button:hover {
+    background-color: #e67e22;
+}
+
+
+/* .intro-container */
+.intro-container{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 50px; /* 헤더 아래에 공간을 추가 */
+    display: flex;
+    align-items: center;
+    margin-bottom: 0px;
+}
+
+.intro-container img{
+    width: 20%;
+    min-width: 300px;
+}
+
+.intro-container h1,
+.intro-container img,
+.intro-container input,
+.intro-container div {
+    margin-bottom: 20px; 
+}
+
+/* 라디오 버튼이 포함된 div 내부 요소에 대한 스타일 */
+.intro-container div label,
+.intro-container div input {
+    margin-bottom: 0; /* div 내부 요소의 마진은 제거 */
+}
+
+
+/* .text-container */
+.text-container {
+    text-align: center;
+    margin-bottom: 1px; /* 텍스트 아래에 여백 추가 */
+    margin-top: 0px;
+}
+
+.text-container h1 {
+    font-size: 25px;
+    color: #E7480C;
+    margin-bottom: -10px;
+    font-weight: bolder;
+}
+
+.text-container h2 {
+    font-size: 19px;
+    color: #333;
+    font-weight: bolder;
+    margin-bottom: -20px;
+}
+
+/* div-container */
+.div-container {
+    width: 100%;
+    max-width: 480px;
+    max-height: 540px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    gap: 6px;
+}
+
+.div-container label {
+    margin-bottom: 5px;
+    font-size: 17px;
+    color: #333;
+    text-align: center;
+    font-weight: bold;
+}
+
+.div-container input {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 12px;
+}
+
+.div-container select {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+
+#gender {
+    display: inline-block; /* 내용만큼 크기를 줄이기 위해 사용 */
+    padding: 0px; /* 내부 여백 조정 */
+    margin: 0; /* 외부 여백 제거 */
+}
+
+#storyContent {
+    display: inline-block; /* 내용만큼 크기를 줄이기 위해 사용 */
+    padding: 0px; /* 내부 여백 조정 */
+    margin: 0; /* 외부 여백 제거 */
+}
+
+/* loader, loading */
+#loader{
+    font-size: 25px;
+    text-align: center;
+}
+
+#loader2{
+    font-size: 25px;
+    text-align: center;
+}
+.loading{
+    display: none;
+}
+.loading.show{
+    display: block;
+}
+
+.loading2{
+    display: none;
+}
+.loading2.show{
+    display: block;
+}
+
+/* dalle-image */
+#dalle-image{
+    text-align: center;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+}
+
+#dalle-image2{
+    text-align: center;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin-left: 100px;
+}
+
 .chat-container {
     width: 100%;
     max-width: 500px;
     margin: auto;
     background-color: #fff;
-    border: 2px solid #f0f0f0;
+    border: 0px;
     border-radius: 10px;
     padding: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     position: relative;
+    margin-top: 110px;
+    width: 500px; /* 고정 너비 */
+    height: 400px; /* 고정 높이 */
+    margin-left: 100px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
 }
+
 
 .chat-bubble {
     padding: 10px 20px; /* 패딩 조정 */
@@ -39,67 +268,91 @@ body {
     padding: 10px;
 }
 
-.send-button {
-    margin-top: 10px;
-    padding: 8px 16px;
-    background-color: #FF4500;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-left: 5px;
+
+
+.chat-container {
+    flex: 1;
+    max-width: 50%;
+    margin-right: 20px;
 }
 
-.intro-container{
+#dalle-image {
+    flex: 1;
+    max-width: 50%;
+    margin-left: 20px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-}
-
-.intro-container img{
-    width: 20%;
-    min-width: 300px;
-}
-
-#loader{
-    font-size: 25px;
-    text-align: center;
-}
-
-.intro-container h1,
-.intro-container img,
-.intro-container input,
-.intro-container div {
-    margin-bottom: 20px; /* 각 요소 아래에 50px의 공간을 추가 */
-}
-
-/* 라디오 버튼이 포함된 div 내부 요소에 대한 스타일 */
-.intro-container div label,
-.intro-container div input {
-    margin-bottom: 0; /* div 내부 요소의 마진은 제거 */
-}
-
-/* 폼 요소 스타일링 (선택적) */
-input[type="text"],
-input[type="number"] {
-    width: 200px;
+    width: 500px; /* 고정 너비 */
+    height: 400px; /* 고정 높이 */
+    margin-top: 110px;
     padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+#dalle-image img {
+    max-width: 100%;
+    border-radius: 10px;
+    width: 490px; /* 고정 너비 */
+    height: 370px;
+
+}
+
+#dalle-image .loading {
+    text-align: center;
     font-size: 16px;
+    color: #666;
+    margin-top: 10px;
 }
 
-input[type="radio"] {
-    margin-right: 5px;
-}
-
-/* 글밥 드롭다운 뒤의 버튼에 대한 마진 설정 */
-#storyContent + button {
-    margin-top: 20px; /* 버튼 상단에 10px의 여유 공간 추가 */
-    padding: 15px 30px; /* 버튼의 패딩을 늘려 크기를 키움 */
-    background-color: #FF4500; /* 주황색 배경 */
-    color: white; /* 하얀색 글씨 */
-    font-size: 16px; /* 글씨 크기 */
+#next {
+    display: none; /* 기존 스타일 유지 */
+    padding: 12px 20px; /* 패딩을 늘려 버튼 크기를 크게 만듦 */
+    background-color: #FF4500; /* 배경색을 파란색으로 설정 */
+    color: white; /* 글자색을 흰색으로 설정 */
     border: none; /* 테두리 제거 */
-    border-radius: 5px; /* 버튼 모서리 둥글게 */
-    cursor: pointer; 
+    border-radius: 20px; /* 모서리를 둥글게 설정 */
+    font-size: 16px; /* 글자 크기를 늘림 */
+    font-weight: bold; /* 글자 굵기를 굵게 설정 */
+    position: fixed; /* 위치를 고정 */
+    bottom: 70px; /* 하단에서 20px 떨어짐 */
+    left: 50%; /* 좌측에서 50% 떨어짐 */
+    transform: translateX(-50%); /* 중앙 정렬 */
+}
+
+#next:hover {
+    background-color: #e67e22; /* 호버 시 더 어두운 파란색으로 변경 */
+}
+
+
+
+#dalle-image2 {
+    flex: 1;
+    max-width: 50%;
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 500px; /* 고정 너비 */
+    height: 400px; /* 고정 높이 */
+    margin-top: 110px;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+#dalle-image2 img {
+    max-width: 100%;
+    border-radius: 10px;
+    width: 490px; /* 고정 너비 */
+    height: 370px;
+
+}
+
+#dalle-image2 .loading {
+    text-align: center;
+    font-size: 16px;
+    color: #666;
+    margin-top: 10px;
 }

@@ -11,70 +11,106 @@
     </head>
 
     <body>
+        <header>
+            <a href="MAINPAGE.html">
+                <img src="logo.png" alt="CarrotTales Logo" style="height: 50px;">
+            </a>
+            <div class="right-side">
+                <button onclick="location.href='#my_page'">MY PAGE</button>
+            </div>
+        </header>
+
         <div id="intro" class="intro-container">
-            <h1>나만의 동화책 생성하러 가기</h1>
-            <img src="carrot.png" alt="chatdoge">
+            <div class="text-container">
+                <h1>정보를 입력해주세요</h1>
+                <h2>입력하신 정보는 동화책 스토리에 반영됩니다.</h2>
+            </div>
+
             <!-- 주인공 이름, 나이, 성별, 관심사, 개선해야하는 행동, 글밥 -->
-            <label for="name">이름</label>
-            <input id="name" type="name">
+            <div class="div-container">
+                <label for="name">이름</label>
+                <input id="name" type="name">
 
-            <label for="age">나이</label>
-            <input id="age" type="age">
+                <label for="age">나이</label>
+                <input id="age" type="age">
 
-            <label for="gender">성별</label>
-            <div id="gender">
-                <input type="radio" id="male" name="gender" value="male">
-                <label for="male">남자</label><br>
-                <input type="radio" id="female" name="gender" value="female">
-                <label for="female">여자</label><br>
+                <label for="gender">성별</label>
+                <div id="gender">
+                    <input type="radio" id="male" name="gender" value="male">
+                    <label for="male">남자</label><br>
+                    <input type="radio" id="female" name="gender" value="female">
+                    <label for="female">여자</label><br>
+                </div>
+
+                <label for="like">관심사</label>
+                <input id="like" type="like">
+
+                <label for="hateFood">편식하는 재료</label>
+                <input id="hateFood" type="hateFood">
+
+                <label for="storyContent">글밥</label>
+                <select id="storyContent">
+                    <option value="short">적음</option>
+                    <option value="long">많음</option>
+                </select>
+                
+                <button onclick="start()">동화책 생성하기</button>
             </div>
-
-            <label for="like">관심사</label>
-            <input id="like" type="like">
-
-            <label for="hateFood">편식하는 재료</label>
-            <input id="hateFood" type="hateFood">
-
-            <label for="storyContent">글밥</label>
-            <select id="storyContent">
-                <option value="short">적음</option>
-                <option value="long">많음</option>
-            </select>
-            
-            <button onclick="start()">동화책 생성하기</button>
         </div>
-        
-        <div id="chat" class="chat-container" style="display: none;">
-            <div class="chat-bubble bot-bubble" id="fortuneResponse">
-                <!-- The fortune response will appear here -->
-            </div>
-            <div id="loader" class="loader" style="display: none;">
-                <i class="loading-icon fas fa-spinner fa-spin"></i>
-            </div>
 
-            <section>
-                <form id="image-form">
-                    <input
-                        type="text"
-                        class="form-control"
-                        id="text"
-                        placeholder="이미지 설명 입력" />
-                    <button type="submit">이미지 생성</button>
-                </form>
-            </section>
-
-            <section class = "image">
+        <div class="container">
+            <div id="chat" class="chat-container" style="display: none;">
+                <div class="chat-bubble bot-bubble" id="fortuneResponse">
+                    <!-- The fortune response will appear here -->
+                </div>
+                <div id="loader" class="loader" style="display: none;">
+                    <i class="loading-icon fas fa-spinner fa-spin"></i>
+                </div>
+            </div>
+            
+            <section id="dalle-image" style="display: none;">
+                <h2 class="msg"></h2>
                 <figure>
                     <img src="" alt="" id="image" />
                 </figure>
-                <!-- <p class = "loading">이미지 생성 중...</p> -->
+                <p class="loading">이미지 생성 중...</p>
             </section>
+            
+            <!-- 두번째 장 만들기 -->
+            <button style="display: none;" onclick="next()" id="next">NEXT PAGE</button>
+
+            <div id="chat2" class="chat-container" style="display:none;">
+                <div class="chat-bubble bot-bubble" id="fortuneResponse2">
+                    <!-- The fortune response will appear here -->
+                </div>
+
+                <div id="loader2" class="loader2" style="display: none;">
+                    <i class="loading-icon fas fa-spinner fa-spin"></i>
+                </div>
+            </div>
+
+            <section id="dalle-image2" style="display: none;">
+                <h2 class="msg"></h2>
+                <figure>
+                    <img src="" alt="" id="image2" />
+                    <p class="loading2">이미지 생성 중...</p>
+                </figure>
+            </section>
+
+            
+            <!-- 마지막 장 만들기 -->
+            <div id="chat3" class="chat-container" style="display:none;">
+                <div class="chat-bubble bot-bubble" id="fortuneResponse3">
+                    <!-- The fortune response will appear here -->
+                </div>
+
+                <!-- <div id="loader2" class="loader2" style="display: none;">
+                    <i class="loading-icon fas fa-spinner fa-spin"></i>
+                </div> -->
+            </div>
         </div>
 
-        <script src="script.js"></script>
+
+        <script src="./script.js"></script>
     </body>
 </html>
-
-
-
-        

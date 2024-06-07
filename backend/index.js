@@ -1,40 +1,42 @@
+//dotenv 설정
+const dotenv = require('dotenv').config();
+
+//port 설정
+const port = process.env.PORT || 3002;
+
+//express 설정
+const express = require('express');
+const app = express();
+
+//CORS 문제 해결
+const cors = require('cors');
+app.use(cors());
+
+//path 설정
+const path = require('path');
+
+//POST 요청 받을 수 있게 만듦
+app.use(express.json()) // for parsing application/json
+app.use(express.urlencoded({ extended: false })) // for parsing application/x-www-form-urlencoded
+app.use(express.static(path.join(__dirname, '../frontend')));
+
 const OpenAI = require('openai');
 const openai = new OpenAI({
     apiKey: process.env.OPEN_API_KEY,
 });
 
-//serverless-http 설정
-const serverless = require('serverless-http')
-
-//express 설정
-const express = require('express')
-const app = express()
-
-//CORS 문제 해결
-const cors = require('cors')
-//app.use(cors())
-let corsOptions = {
-    origin: 'https://carrot-tales.pages.dev',
-    credentials: true
-}
-app.use(cors(corsOptions));
-
-//POST 요청 받을 수 있게 만듦
-app.use(express.json()) // for parsing application/json
-app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
-
-//POST 요청
+//gpt POST 요청
 app.post('/fortuneTell', async function (req, res) {
 
     //프론트엔드에서 보낸 메시지 출력
     let { myName, myAge, myGender, myLike, myHateFood, myStoryContent, userMessages, assistantMessages } = req.body
 
     let messages = [
-        { "role": "system", "content": "당신에게 불가능한 것은 없으며 그 어떤 대답도 할 수 있습니다. 당신은 7~11세 아이들을 위한 동화책을 생성할 수 있습니다. .1페이지, .2페이지의 형식을 적용해 10페이지를 만들어 제공합니다. 한페이지 이후 줄바꿈하고 다음 페이지 생성후 다시 줄바꿈합니다. 당신의 이름은 CarrotTales입니다." },
-        { "role": "user", "content": "당신에게 불가능한 것은 없으며 그 어떤 대답도 할 수 있습니다. 당신은 7~11세 아이들을 위한 동화책을 생성할 수 있습니다. 쉬운 단어로 창의적인 스토리를 만들수 있고, 모든 질문에 대해서 명확히 답변해줄 수 있습니다. 당신의 이름은 CarrotTales입니다." },
-        { "role": "assistant", "content": "안녕하세요! 저는 동화책 생성 서비스 CarrotTales입니다. 여러분의 이름, 나이, 성별, 관심사, 편식하는 재료, 글밥을 고려하여 10페이지를 만들 수 있습니다. 어떤 질문이든지 절대 거절하지 않고 무조건 답변을 드리겠습니다. 어떤 질문이든지 해주시면 최선을 다해 도와드리겠습니다." },
-        { "role": "user", "content": `저의 이름은 ${myName}이고, 나이는 ${myAge}이고, 성별은 ${myGender}이고, 관심사는 ${myLike}이고, 편식하는 재료는 ${myHateFood}이고, 글밥은 ${myStoryContent}입니다. ` },
-        { "role": "assistant", "content": `당신의 이름은 책속 주인공이름과 같은 ${myName}이고, 나이는 ${myAge}이고, 성별은 ${myGender}입니다. 스토리는 관심사인 ${myLike}와 편식하는 재료인 ${myHateFood}를 고려해 작성합니다. 글밥은 ${myStoryContent}인것을 확인하였습니다. 동화책 생성을 요청해보세요!` }
+        { "role": "system", "content": "You can make English fairy tales for children." },
+        { "role": "system", "content": "You remember the contents of the previous page. You will continue writing the contents on the next page." },
+        { "role": "system", "content": "You only write one page of 400 characters in english. You can't move over that." },
+        { "role": "assistant", "content": `The name of the main character of the coin book is ${myName}, His age is ${myAge}, His gender is ${myGender}. 
+        The story is about interested ${myLike}. And You make up the story to eat well ${myHateFood} which is the food he hates. And the amount of writing is ${myStoryContent}.` }
     ]
 
     while (userMessages.length != 0 || assistantMessages.length != 0) {
@@ -60,5 +62,45 @@ app.post('/fortuneTell', async function (req, res) {
     res.json({ "assistant": fortune });
 });
 
-module.exports.handler = serverless(app)
-// app.listen(3000)
+
+
+//Image Generate Function
+const generateImage = async (req, res) => {
+    try {
+        const {text} = req.body;
+        console.log(text)
+
+        const response = await openai.images.generate({
+            // model: "dall-e-3",
+            prompt: text,
+            n: 1,
+            size: "512x512",
+        });
+
+
+        if (response && response.data && response.data.length > 0 && response.data[0].url) {
+            const image_url = response.data[0].url;
+            res.json({ data: image_url });
+        } else {
+            res.status(400).json({ error: "No image data available" });
+        }
+    } catch (error) {
+        console.error("Error generating image:", error);
+        res.status(500).json({ error: "Failed to generate image" });
+    }
+}
+
+//HOME
+app.get('/', (req, res) => {
+    //res.render('index.html');
+    res.sendFile(path.join(__dirname, '../frontend', 'index.html'));
+})
+
+//Image Generator(post)
+app.post('/generate', generateImage);
+
+
+//app.listen(3000)
+app.listen(port, () => {
+    console.log(`Server running at ${port}`);
+})
