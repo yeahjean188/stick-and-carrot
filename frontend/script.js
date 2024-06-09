@@ -29,7 +29,7 @@ async function start() {
 
     //백엔드 서버에 메시지를 보내고 응답 출력
     try {
-        const response = await fetch('https://fqbzgxzina7gng23vnj3hogecu0mciwq.lambda-url.ap-northeast-2.on.aws/fortuneTell', {
+        const response = await fetch('http://localhost:3002/fortuneTell', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -71,7 +71,7 @@ async function start() {
         //이미지 생성 요청 함수
         //dall.e 불러오기
         showLoading();
-        const d_response = await fetch('https://fqbzgxzina7gng23vnj3hogecu0mciwq.lambda-url.ap-northeast-2.on.aws/generate', {
+        const d_response = await fetch('/generate', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -139,7 +139,7 @@ async function next() {
         userMessages.push(message2);
 
         try{
-            const response2 = await fetch('https://fqbzgxzina7gng23vnj3hogecu0mciwq.lambda-url.ap-northeast-2.on.aws/fortuneTell', {
+            const response2 = await fetch('http://localhost:3002/fortuneTell', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -183,7 +183,7 @@ async function next() {
             //이미지 생성 요청 함수
             //dall.e 불러오기
             showLoading2();
-            const d2_response = await fetch('https://fqbzgxzina7gng23vnj3hogecu0mciwq.lambda-url.ap-northeast-2.on.aws/generate', {
+            const d2_response = await fetch('/generate', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -218,8 +218,8 @@ async function next() {
         // Push
         userMessages.push(message2);
 
-        try{  
-            const response2 = await fetch('https://fqbzgxzina7gng23vnj3hogecu0mciwq.lambda-url.ap-northeast-2.on.aws/fortuneTell', {
+        try{
+            const response2 = await fetch('http://localhost:3002/fortuneTell', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

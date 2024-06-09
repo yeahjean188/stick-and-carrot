@@ -1,9 +1,8 @@
+//dotenv 설정
+const dotenv = require('dotenv').config();
 
-const dotenv = require('dotenv');
-dotenv.config();
-
-//serverless-http 설정
-const serverless = require('serverless-http')
+//port 설정
+const port = process.env.PORT || 3002;
 
 //express 설정
 const express = require('express');
@@ -11,49 +10,19 @@ const app = express();
 
 //CORS 문제 해결
 const cors = require('cors');
-
-// CORS 설정
-const corsOptions = {
-    origin: 'https://carrot-tales.pages.dev',
-    methods: ['GET', 'POST', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true
-  };
-
-//app.use(cors());
-// let corsOptions = {
-//     origin: 'https://carrot-tales.pages.dev',
-//     credentials: true, // 응답 헤더에 Access-Control-Allow-Credentials 추가
-// }
-app.use(cors(corsOptions));
-
+app.use(cors());
 
 //path 설정
 const path = require('path');
 
 //POST 요청 받을 수 있게 만듦
 app.use(express.json()) // for parsing application/json
-app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
-//app.use(express.static(path.join(__dirname, '../frontend')));
+app.use(express.urlencoded({ extended: false })) // for parsing application/x-www-form-urlencoded
+app.use(express.static(path.join(__dirname, '../frontend')));
 
 const OpenAI = require('openai');
 const openai = new OpenAI({
     apiKey: process.env.OPEN_API_KEY,
-});
-
-if (!process.env.OPEN_API_KEY) {
-    console.error("The OPENAI_API_KEY environment variable is missing or empty.");
-    process.exit(1);
-  }
-
-// 프리플라이트 요청 처리
-app.options('*', cors(corsOptions));
-
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://carrot-tales.pages.dev');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  next();
 });
 
 //gpt POST 요청
@@ -64,9 +33,10 @@ app.post('/fortuneTell', async function (req, res) {
 
     let messages = [
         { "role": "system", "content": "You can make English fairy tales for children." },
-        { "role": "system", "content": "You remember the contents of the previous page. You will continue writing the contents on the next page." },
-        { "role": "system", "content": "You only write one page of 400 characters in english. You can't move over that." },
-        { "role": "assistant", "content": `The name of the main character of the coin book is ${myName}, His age is ${myAge}, His gender is ${myGender}. The story is about interested ${myLike}. And You make up the story to eat well ${myHateFood} which is the food he hates. And the amount of writing is ${myStoryContent}.` }
+        { "role": "assistant", "content": "You remember the contents of the previous page. You will continue writing the contents on the next page." },
+        { "role": "assistant", "content": "You only write one page of 400 characters in english. You can't move over that." },
+        { "role": "assistant", "content": `The name of the main character of the coin book is ${myName}, His age is ${myAge}, His gender is ${myGender}. 
+        The story is about interested ${myLike}. And You make up the story to eat well ${myHateFood} which is the food he hates. And the amount of writing is ${myStoryContent}.` }
     ]
 
     while (userMessages.length != 0 || assistantMessages.length != 0) {
@@ -131,8 +101,6 @@ app.post('/generate', generateImage);
 
 
 //app.listen(3000)
-// app.listen(port, () => {
-//     console.log(`Server running at ${port}`);
-// })
-
-module.exports.handler = serverless(app)
+app.listen(port, () => {
+    console.log(`Server running at ${port}`);
+})
