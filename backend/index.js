@@ -58,6 +58,7 @@ app.post('/fortuneTell', async function (req, res) {
 
     let messages = [
         { "role": "system", "content": "You can make English fairy tales for children." },
+        { "role": "system", "content": "You remember the contents of the previous page. You will continue writing the contents on the next page." },
         { "role": "assistant", "content": "You remember the contents of the previous page. You will continue writing the contents on the next page." },
         { "role": "assistant", "content": "You only write one page of 400 characters in english. You can't move over that." },
         { "role": "assistant", "content": `The name of the main character of the coin book is ${myName}, His age is ${myAge}, His gender is ${myGender}. 

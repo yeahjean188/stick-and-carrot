@@ -185,6 +185,11 @@ input[type="radio"] {
     font-size: 25px;
     text-align: center;
 }
+#loader3{
+    font-size: 25px;
+    text-align: center;
+}
+
 .loading{
     display: none;
 }
@@ -196,6 +201,13 @@ input[type="radio"] {
     display: none;
 }
 .loading2.show{
+    display: block;
+}
+
+.loading3{
+    display: none;
+}
+.loading3.show{
     display: block;
 }
 
