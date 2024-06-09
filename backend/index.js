@@ -1,8 +1,9 @@
 //dotenv 설정
-const dotenv = require('dotenv').config();
+const dotenv = require('dotenv');
+dotenv.config();
 
 //port 설정
-const port = process.env.PORT || 3002;
+// const port = process.env.PORT || 3002;
 
 //express 설정
 const express = require('express');
@@ -10,12 +11,12 @@ const app = express();
 
 //CORS 문제 해결
 const cors = require('cors');
-app.use(cors());
-// let corsOptions = {
-//     origin: 'carrot-tales.pages.dev',
-//     credentials: true
-// }
-// app.use(cors(corsOptions));
+app.use(cors({
+    origin: 'https://carrot-tales.pages.dev',
+    credentials: true,
+    optionsSuccessStatus: 200, // 응답 상태 200으로 설정
+}));
+
 
 //path 설정
 const path = require('path');
@@ -33,8 +34,27 @@ const openai = new OpenAI({
     apiKey: process.env.OPEN_API_KEY,
 });
 
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', 'https://carrot-tales.pages.dev');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Credentials', 'true');
+    next();
+});
+
+app.options('/fortuneTell', (req, res) => {
+    res.header('Access-Control-Allow-Origin', 'https://carrot-tales.pages.dev');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.send();
+});
+
+
 //gpt POST 요청
 app.post('/fortuneTell', async function (req, res) {
+    res.setHeader('Access-Control-Allow-Origin', 'https://carrot-tales.pages.dev');
+    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+
 
     //프론트엔드에서 보낸 메시지 출력
     let { myName, myAge, myGender, myLike, myHateFood, myStoryContent, userMessages, assistantMessages } = req.body
@@ -69,48 +89,5 @@ app.post('/fortuneTell', async function (req, res) {
 
     res.json({ "assistant": fortune });
 });
-
-
-
-//Image Generate Function
-const generateImage = async (req, res) => {
-    try {
-        const {text} = req.body;
-        console.log(text)
-
-        const response = await openai.images.generate({
-            // model: "dall-e-3",
-            prompt: text,
-            n: 1,
-            size: "512x512",
-        });
-
-
-        if (response && response.data && response.data.length > 0 && response.data[0].url) {
-            const image_url = response.data[0].url;
-            res.json({ data: image_url });
-        } else {
-            res.status(400).json({ error: "No image data available" });
-        }
-    } catch (error) {
-        console.error("Error generating image:", error);
-        res.status(500).json({ error: "Failed to generate image" });
-    }
-}
-
-//HOME
-app.get('/', (req, res) => {
-    //res.render('index.html');
-    res.sendFile(path.join(__dirname, '../frontend', 'index.html'));
-})
-
-//Image Generator(post)
-app.post('/generate', generateImage);
-
-
-//app.listen(3000)
-// app.listen(port, () => {
-//     console.log(`Server running at ${port}`);
-// })
 
 module.exports.handler = serverless(app)
