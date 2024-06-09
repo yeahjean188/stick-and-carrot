@@ -2,9 +2,6 @@
 const dotenv = require('dotenv');
 dotenv.config();
 
-//port 설정
-// const port = process.env.PORT || 3002;
-
 //express 설정
 const express = require('express');
 const app = express();
@@ -89,5 +86,40 @@ app.post('/fortuneTell', async function (req, res) {
 
     res.json({ "assistant": fortune });
 });
+
+//Image Generate Function
+const generateImage = async (req, res) => {
+    try {
+        const {text} = req.body;
+        console.log(text)
+
+        const response = await openai.images.generate({
+            // model: "dall-e-3",
+            prompt: text,
+            n: 1,
+            size: "512x512",
+        });
+
+
+        if (response && response.data && response.data.length > 0 && response.data[0].url) {
+            const image_url = response.data[0].url;
+            res.json({ data: image_url });
+        } else {
+            res.status(400).json({ error: "No image data available" });
+        }
+    } catch (error) {
+        console.error("Error generating image:", error);
+        res.status(500).json({ error: "Failed to generate image" });
+    }
+}
+
+//HOME
+app.get('/', (req, res) => {
+    //res.render('index.html');
+    res.sendFile(path.join(__dirname, '../frontend', 'Input-Information.html'));
+})
+
+//Image Generator(post)
+app.post('/generate', generateImage);
 
 module.exports.handler = serverless(app)

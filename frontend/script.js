@@ -15,7 +15,7 @@ async function start() {
 
     document.getElementById("intro").style.display = "none";
     document.getElementById("chat").style.display = "block";
-    // document.getElementById("dalle-image").style.display = "block";
+    document.getElementById("dalle-image").style.display = "block";
     // document.getElementById("next").style.display = "block";
 
     //로딩 아이콘 보여주기
@@ -68,7 +68,37 @@ async function start() {
         botBubble.textContent = backcontent;
         document.getElementById('fortuneResponse').appendChild(botBubble);
 
+        //이미지 생성 요청 함수
+        //dall.e 불러오기
+        showLoading();
+        const d_response = await fetch('https://62x2jqh5bc6s353c7rzm77iq3u0dubtg.lambda-url.ap-northeast-2.on.aws/generate', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({text: backcontent})
+        })
+    
+        if(!d_response.ok) {
+            throw new Error('이미지 생성 오류')
+        }
+    
+        const d_data = await d_response.json();
+        console.log(d_data)
+        const imageUrl = d_data.data;
+        document.querySelector('#image').src = imageUrl;
+        removeLoading();
+
     } catch (error) {
         console.error('Error:', error);
     }
+}
+
+//로딩 텍스트 표시
+function showLoading(){
+    document.querySelector('.loading').classList.add('show');
+}
+//로딩 텍스트 비표시
+function removeLoading(){
+    document.querySelector('.loading').classList.remove('show');
 }
