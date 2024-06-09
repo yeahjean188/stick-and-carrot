@@ -1,116 +1,94 @@
 <!DOCTYPE html>
 <html lang="ko">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>CarrotTales</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" 
-        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" 
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="style.css">
-    </head>
-
-    <body>
-        <header>
-            <a href="MAINPAGE.html">
+<head>
+    <meta charset="UTF-8">
+    <title>One Page Scroll with Fixed Header</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="left-side">
+            <a href="index.html">
                 <img src="logo.png" alt="CarrotTales Logo" style="height: 50px;">
             </a>
-            <div class="right-side">
-                <button onclick="location.href='#my_page'">MY PAGE</button>
-            </div>
-        </header>
-
-        <div id="intro" class="intro-container">
-            <div class="text-container">
-                <h1>정보를 입력해주세요</h1>
-                <h2>입력하신 정보는 동화책 스토리에 반영됩니다.</h2>
-            </div>
-
-            <!-- 주인공 이름, 나이, 성별, 관심사, 개선해야하는 행동, 글밥 -->
-            <div class="div-container">
-                <label for="name">이름</label>
-                <input id="name" type="name">
-
-                <label for="age">나이</label>
-                <input id="age" type="age">
-
-                <label for="gender">성별</label>
-                <div id="gender">
-                    <input type="radio" id="male" name="gender" value="male">
-                    <label for="male">남자</label><br>
-                    <input type="radio" id="female" name="gender" value="female">
-                    <label for="female">여자</label><br>
-                </div>
-
-                <label for="like">관심사</label>
-                <input id="like" type="like">
-
-                <label for="hateFood">편식하는 재료</label>
-                <input id="hateFood" type="hateFood">
-
-                <label for="storyContent">글밥</label>
-                <select id="storyContent">
-                    <option value="short">적음</option>
-                    <option value="long">많음</option>
-                </select>
-                
-                <button onclick="start()">동화책 생성하기</button>
-            </div>
         </div>
-
-        <div class="container">
-            <div id="chat" class="chat-container" style="display: none;">
-                <div class="chat-bubble bot-bubble" id="fortuneResponse">
-                    <!-- The fortune response will appear here -->
-                </div>
-                <div id="loader" class="loader" style="display: none;">
-                    <i class="loading-icon fas fa-spinner fa-spin"></i>
-                </div>
-            </div>
-            
-            <section id="dalle-image" style="display: none;">
-                <h2 class="msg"></h2>
-                <figure>
-                    <img src="" alt="" id="image" />
-                </figure>
-                <p class="loading">이미지 생성 중...</p>
-            </section>
-            
-            <!-- 두번째 장 만들기 -->
-            <button style="display: none;" onclick="next()" id="next">NEXT PAGE</button>
-
-            <div id="chat2" class="chat-container" style="display:none;">
-                <div class="chat-bubble bot-bubble" id="fortuneResponse2">
-                    <!-- The fortune response will appear here -->
-                </div>
-
-                <div id="loader2" class="loader2" style="display: none;">
-                    <i class="loading-icon fas fa-spinner fa-spin"></i>
-                </div>
-            </div>
-
-            <section id="dalle-image2" style="display: none;">
-                <h2 class="msg"></h2>
-                <figure>
-                    <img src="" alt="" id="image2" />
-                    <p class="loading2">이미지 생성 중...</p>
-                </figure>
-            </section>
-
-            
-            <!-- 마지막 장 만들기 -->
-            <div id="chat3" class="chat-container" style="display:none;">
-                <div class="chat-bubble bot-bubble" id="fortuneResponse3">
-                    <!-- The fortune response will appear here -->
-                </div>
-
-                <!-- <div id="loader2" class="loader2" style="display: none;">
-                    <i class="loading-icon fas fa-spinner fa-spin"></i>
-                </div> -->
-            </div>
+        <div class="right-side">
+            <button onclick="location.href='Log-In.html'">Login</button>
+            <button onclick="location.href='Join-Us.html'">Join Us</button>
         </div>
+        
+    </header>
+    <main>
+        <section id="section1">
+            <div class="content-wrapper">
+                <div class="image-container">
+                    <img src="img-logo.webp" alt="CarrotTales Banner" style="width: 100%; max-width: 600px;">
+                </div>
+                <div class="text-container">
+                    <h3>아이 맞춤형 솔루션 동화책</h3>
+                    <p>아이가 주인공이 되어 모험을 하며 배우고 성장해요!</p>
+                    <button onclick="location.href='Input-Information.html'">Create</button>
+                </div>
+            </div>
+        </section>
+        
+        
+        <section id="section2">
+            <div class="image-container">
+                <img src="./MAINPAGE-img/img-section2.png" alt="아이의 식습관을 개선하는 솔루션 제공">
+            </div>
+        </section>
 
 
-        <script src="./script.js"></script>
-    </body>
+        <section id="section3">
+            <div class="content-wrapper">
+                <div class="image-container">
+                    <img src="./MAINPAGE-img/img-section3.png" alt="iPad Pro with Story">
+                </div>
+                <div class="text-container">
+                    <h2>하나뿐인<br>나만의 동화책</h2>
+                    <p>아이를 주인공으로 하여<br>관심사를 고려한 이야기 생성</p>
+                    <button onclick="location.href='Input-Information.html'">Create</button>
+                </div>
+            </div>
+        </section>
+        
+
+        <section id="section4">
+            <div class="content-wrapper">
+                <div class="text-container">
+                    <h2>아이의<br>편식습관 지도</h2>
+                    <p>아이의 잘못된 식습관에 적합한<br>솔루션을 제안하여 편식 습관 지도</p>
+                    <button onclick="location.href='Input-Information.html'">Create</button>
+                </div>
+                <div class="image-container">
+                    <img src="./MAINPAGE-img/img-section4.png" alt="아이의 편식 습관 지도">
+                </div>
+            </div>
+        </section>
+        
+        <section id="section5">
+            <div class="content-wrapper">
+                <div class="image-container">
+                    <img src="./MAINPAGE-img/img-section5.png" alt="실물 종이책 소장">
+                </div>
+                <div class="text-container">
+                    <h2>실물<br>종이책 소장</h2>
+                    <p>마음에 드는 스토리는 실제 종이책으로 받아<br>자신이 주인공인 동화책 소장</p>
+                    <button onclick="location.href='Input-Information.html'">Create</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="section6">
+            <div class="image-container">
+                <img src="./MAINPAGE-img/img-section6.png" alt="섹션 6 이미지">
+            </div>
+            <div class="button-container">
+                <button onclick="location.href='Input-Information.html'">나만의 동화책 생성하기</button>
+            </div>
+        </section>
+        
+    </main>
+</body>
 </html>

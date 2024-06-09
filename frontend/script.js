@@ -29,7 +29,7 @@ async function start() {
 
     //백엔드 서버에 메시지를 보내고 응답 출력
     try {
-        const response = await fetch('http://localhost:3002/fortuneTell', {
+        const response = await fetch('https://62x2jqh5bc6s353c7rzm77iq3u0dubtg.lambda-url.ap-northeast-2.on.aws/fortuneTell', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -139,7 +139,7 @@ async function next() {
         userMessages.push(message2);
 
         try{
-            const response2 = await fetch('http://localhost:3002/fortuneTell', {
+            const response2 = await fetch('https://62x2jqh5bc6s353c7rzm77iq3u0dubtg.lambda-url.ap-northeast-2.on.aws/fortuneTell', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -219,7 +219,7 @@ async function next() {
         userMessages.push(message2);
 
         try{
-            const response2 = await fetch('http://localhost:3002/fortuneTell', {
+            const response2 = await fetch('https://62x2jqh5bc6s353c7rzm77iq3u0dubtg.lambda-url.ap-northeast-2.on.aws/fortuneTell', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

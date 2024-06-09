@@ -11,9 +11,17 @@ const app = express();
 //CORS 문제 해결
 const cors = require('cors');
 app.use(cors());
+// let corsOptions = {
+//     origin: 'carrot-tales.pages.dev',
+//     credentials: true
+// }
+// app.use(cors(corsOptions));
 
 //path 설정
 const path = require('path');
+
+//serverless-http 설정
+const serverless = require('serverless-http')
 
 //POST 요청 받을 수 있게 만듦
 app.use(express.json()) // for parsing application/json
@@ -101,6 +109,8 @@ app.post('/generate', generateImage);
 
 
 //app.listen(3000)
-app.listen(port, () => {
-    console.log(`Server running at ${port}`);
-})
+// app.listen(port, () => {
+//     console.log(`Server running at ${port}`);
+// })
+
+module.exports.handler = serverless(app)
