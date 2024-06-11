@@ -226,6 +226,13 @@ input[type="radio"] {
     align-items: center; */
 }
 
+#dalle-image3{
+    text-align: center;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+}
+
 .container {
     display: flex;
     justify-content: center;
@@ -363,6 +370,37 @@ input[type="radio"] {
 }
 
 #dalle-image2 .loading {
+    text-align: center;
+    font-size: 16px;
+    color: #666;
+    margin-top: 10px;
+}
+
+
+#dalle-image3 {
+    flex: 1;
+    max-width: 50%;
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 500px; /* 고정 너비 */
+    height: 400px; /* 고정 높이 */
+    margin-top: 110px;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+#dalle-image3 img {
+    max-width: 100%;
+    border-radius: 10px;
+    width: 490px; /* 고정 너비 */
+    height: 370px;
+
+}
+
+#dalle-image3 .loading {
     text-align: center;
     font-size: 16px;
     color: #666;
