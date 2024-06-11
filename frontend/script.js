@@ -2,7 +2,7 @@
 let userMessages = [];
 let assistantMessages = [];
 let myName, myAge, myGender, myLike, myHateFood, myStoryContent;
-let backcontent, nextstory;
+let backcontent, nextstory, dalleprompt;
 let nextCallCount = 1; // 호출 횟수를 추적하는 변수
 
 async function start() {
@@ -67,6 +67,54 @@ async function start() {
         botBubble.textContent = backcontent;
         document.getElementById('fortuneResponse').appendChild(botBubble);
 
+        //gpt에 달리 프롬프트 짜달라고 호출할 거임.
+        let imgRequestMessage;
+        imgRequestMessage = `${backcontent} is the story of a fairy tale book. Please describe the image so that I can put this scene in dall-e's prompt.`;
+        
+        // Push
+        userMessages.push(imgRequestMessage);
+
+        try{
+            const response1 = await fetch('https://62x2jqh5bc6s353c7rzm77iq3u0dubtg.lambda-url.ap-northeast-2.on.aws/fortuneTell', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    myName: myName,
+                    myAge: myAge,
+                    myGender: myGender,
+                    myLike: myLike,
+                    myHateFood: myHateFood,
+                    myStoryContent: myStoryContent,
+                    userMessages: userMessages,
+                    assistantMessages: assistantMessages,
+                })
+            });
+
+            if (!response1.ok) {
+                throw new Error('Request failed with status ' + response2.status);
+            }
+
+            const data1 = await response1.json();
+
+            //Push
+            assistantMessages.push(data1.assistant);
+            dalleprompt = data1.assistant;
+            // backcontent = nextstory; //backcontent를 업데이트합니다.
+            //console.log('Response:', data1);
+
+            //채팅 말풍선에 챗GPT 응답 출력
+            const botBubble = document.createElement('div');
+            botBubble.className = 'chat-bubble bot-bubble';
+            botBubble.textContent = dalleprompt;
+            document.getElementById('plusResponse').appendChild(botBubble);
+        }
+        catch (error) {
+            console.error('Error:', error);
+        }
+        
+
         //이미지 생성 요청 함수
         //dall.e 불러오기
         showLoading();
@@ -75,7 +123,7 @@ async function start() {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({text: backcontent})
+            body: JSON.stringify({text: dalleprompt})
         })
     
         if(!d_response.ok) {
@@ -178,6 +226,53 @@ async function next() {
             botBubble.className = 'chat-bubble bot-bubble';
             botBubble.textContent = nextstory;
             document.getElementById('fortuneResponse2').appendChild(botBubble);
+            
+            //gpt에 달리 프롬프트 짜달라고 호출할 거임.
+            let imgRequestMessage;
+            imgRequestMessage = `${backcontent} is the story of a fairy tale book. Please describe the image so that I can put this scene in dall-e's prompt.`;
+            
+            // Push
+            userMessages.push(imgRequestMessage);
+
+            try{
+                const response1 = await fetch('https://62x2jqh5bc6s353c7rzm77iq3u0dubtg.lambda-url.ap-northeast-2.on.aws/fortuneTell', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        myName: myName,
+                        myAge: myAge,
+                        myGender: myGender,
+                        myLike: myLike,
+                        myHateFood: myHateFood,
+                        myStoryContent: myStoryContent,
+                        userMessages: userMessages,
+                        assistantMessages: assistantMessages,
+                    })
+                });
+
+                if (!response1.ok) {
+                    throw new Error('Request failed with status ' + response2.status);
+                }
+
+                const data1 = await response1.json();
+
+                //Push
+                assistantMessages.push(data1.assistant);
+                dalleprompt = data1.assistant;
+                // backcontent = nextstory; //backcontent를 업데이트합니다.
+                //console.log('Response:', data1);
+
+                //채팅 말풍선에 챗GPT 응답 출력
+                const botBubble = document.createElement('div');
+                botBubble.className = 'chat-bubble bot-bubble';
+                botBubble.textContent = dalleprompt;
+                document.getElementById('plusResponse').appendChild(botBubble);
+            }
+            catch (error) {
+                console.error('Error:', error);
+            }
 
             //이미지 생성 요청 함수
             //dall.e 불러오기
@@ -187,7 +282,7 @@ async function next() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({text: nextstory})
+                body: JSON.stringify({text: dalleprompt})
             })
         
             if(!d2_response.ok) {
@@ -261,7 +356,6 @@ async function next() {
 
             //이미지 생성 요청 함수
             //dall.e 불러오기
-            
             showLoading3();
             const d3_response = await fetch('https://62x2jqh5bc6s353c7rzm77iq3u0dubtg.lambda-url.ap-northeast-2.on.aws/generate', {
                 method: 'POST',
