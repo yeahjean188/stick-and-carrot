@@ -1,6 +1,4 @@
-body, button {
-    margin: 0;
-    padding: 0;
+body {
     font-family: Arial, sans-serif;
 }
 
@@ -16,6 +14,7 @@ header {
     top: 0;
     left: 0;
     z-index: 1000;
+    height: 30px;
 }
 
 
@@ -36,398 +35,374 @@ header {
 }
 
 .right-side button:hover {
-    background-color: whitesmoke; /* 호버 시 더 어두운 주황색으로 변경 */
+    background-color: whitesmoke; /* 호버 시 더 어두운 흰색으로 변경 */
 }
 
 
-main {
-    padding-top: 60px; /* Adjust this value based on your header's actual height */
+
+/* 폼 요소 스타일링 (선택적) */
+input[type="text"],
+input[type="number"] {
+    width: 200px;
+    padding: 10px;
+    font-size: 16px;
 }
 
-section {
-    height: 100vh;
-    display: flex;
+input[type="radio"] {
+    margin-right: 5px;
+}
+
+/* 글밥 드롭다운 뒤의 버튼에 대한 마진 설정 */
+#storyContent + button {
+    margin-top: 20px; /* 버튼 상단에 10px의 여유 공간 추가 */
+    padding: 12px 24px; /* 버튼의 패딩을 늘려 크기를 키움 */
+    background-color: #FF4500; /* 주황색 배경 */
+    color: white; /* 하얀색 글씨 */
+    font-size: 16px; /* 글씨 크기 */
+    border: none; /* 테두리 제거 */
+    border-radius: 20px; /* 버튼 모서리 둥글게 */
+    cursor: pointer;
+    font-weight: bold; 
+}
+
+#storyContent + button:hover {
+    background-color: #e67e22;
+}
+
+
+/* .intro-container */
+.intro-container{
+    flex-direction: column;
     justify-content: center;
-    align-items: center; 
+    align-items: center;
+    padding-top: 50px; /* 헤더 아래에 공간을 추가 */
+    display: flex;
+    align-items: center;
+    margin-bottom: 0px;
+}
+
+.intro-container img{
+    width: 20%;
+    min-width: 300px;
+}
+
+.intro-container h1,
+.intro-container img,
+.intro-container input,
+.intro-container div {
+    margin-bottom: 20px; 
+}
+
+/* 라디오 버튼이 포함된 div 내부 요소에 대한 스타일 */
+.intro-container div label,
+.intro-container div input {
+    margin-bottom: 0; /* div 내부 요소의 마진은 제거 */
+}
+
+
+/* .text-container */
+.text-container {
+    text-align: center;
+    margin-bottom: 1px; /* 텍스트 아래에 여백 추가 */
+    margin-top: 0px;
+}
+
+.text-container h1 {
+    font-size: 25px;
+    color: #E7480C;
+    margin-bottom: -10px;
+    font-weight: bolder;
+}
+
+.text-container h2 {
+    font-size: 19px;
+    color: #333;
+    font-weight: bolder;
+    margin-bottom: -20px;
+}
+
+/* div-container */
+.div-container {
+    width: 100%;
+    max-width: 480px;
+    max-height: 540px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    gap: 6px;
+}
+
+.div-container label {
+    margin-bottom: 5px;
+    font-size: 17px;
+    color: #333;
+    text-align: center;
+    font-weight: bold;
+}
+
+.div-container input {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 12px;
+}
+
+.div-container select {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+
+#gender {
+    display: inline-block; /* 내용만큼 크기를 줄이기 위해 사용 */
+    padding: 0px; /* 내부 여백 조정 */
+    margin: 0; /* 외부 여백 제거 */
+}
+
+#storyContent {
+    display: inline-block; /* 내용만큼 크기를 줄이기 위해 사용 */
+    padding: 0px; /* 내부 여백 조정 */
+    margin: 0; /* 외부 여백 제거 */
+}
+
+/* loader, loading */
+#loader{
+    font-size: 25px;
     text-align: center;
 }
 
-#section1 {
-    background-color: white; /* 배경색 변경 가능 */
-    display: flex;
-    align-items: center; /* 세로 중앙 정렬 */
-    justify-content: center; /* 가로 중앙 정렬 */
-    height: 100vh;
-    flex-direction: column; /* 세로 방향 정렬 */
-    padding-top: 20px; /* 상단 패딩 조정 */
-    padding-bottom: 20px; /* 하단 패딩 조정 */
+#loader2{
+    font-size: 25px;
+    text-align: center;
+}
+#loader3{
+    font-size: 25px;
+    text-align: center;
 }
 
-.image-container {
+.loading{
+    display: none;
+}
+.loading.show{
+    display: block;
+}
+
+.loading2{
+    display: none;
+}
+.loading2.show{
+    display: block;
+}
+
+.loading3{
+    display: none;
+}
+.loading3.show{
+    display: block;
+}
+
+/* dalle-image */
+#dalle-image{
+    text-align: center;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+}
+
+#dalle-image2{
+    text-align: center;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+}
+
+#dalle-image3{
+    text-align: center;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+}
+
+.container {
     display: flex;
     justify-content: center;
-    margin-bottom: 5px; /* 이미지와 텍스트 사이 간격 조정 */
-    margin-top: -195px;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin-left: 100px;
 }
 
-.image-container img {
-    width: 70%;
-    max-width: 300px; /* 최대 너비 설정 */
-    height: auto; /* 자동 높이 설정으로 비율 유지 */
-    transform: scale(0.7);
-
-}
-
-.text-container {
-    text-align: center; /* 텍스트 중앙 정렬 */
-    margin-top: -120px; /* 음수 마진으로 텍스트 컨테이너 위로 이동 */
-    width: 100%; /* 텍스트 컨테이너 너비 */
-    max-width: 600px; /* 최대 너비 설정 */
+.chat-container {
+    width: 100%;
+    max-width: 500px;
+    margin: auto;
+    background-color: #fff;
+    border: 0px;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     position: relative;
-}
-
-.text-container h3 {
-    font-size: 50px; /* 제목 폰트 크기 */
-    color: #E7480C; /* 제목 폰트 색상 */
-    margin-bottom: 5px; /* 제목과 본문 사이 간격 */
-}
-
-.text-container p {
-    font-size: 24px; /* 본문 폰트 크기 */
-    color: #333; /* 본문 폰트 색상 */
-    margin-bottom: 20px; /* 본문과 버튼 사이 간격 */
-    line-height: 1.2; /* 줄 간격 설정 */
+    margin-top: 110px;
+    width: 500px; /* 고정 너비 */
+    height: 400px; /* 고정 높이 */
+    margin-left: 100px;
+    font-size: 20px;
     font-weight: bold;
-}
-
-.text-container button {
-    padding: 12px 24px;
-    background-color: #E7480C;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 15px;
-    font-weight: bold;
-}
-
-.text-container button:hover {
-    background-color: #e67e22; /* 호버 시 색상 변경 */
+    text-align: center;
 }
 
 
-
-#section2 {
-    background-color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    padding: 0; /* 패딩 제거 */
-    margin: 0; /* 마진 제거 */
-    overflow: hidden; /* 넘치는 내용 숨기기 */
+.chat-bubble {
+    padding: 10px 20px; /* 패딩 조정 */
+    margin-bottom: 10px; /* 하단 여백 */
+    border-radius: 20px; /* 더욱 둥근 모서리 */
 }
 
-#section2 .image-container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.user-bubble {
+    background-color: #FFFFFF; /* 사용자 말풍선은 연한 주황색으로 */
+    text-align: right;
+    color: #333; /* 텍스트 색상 */
 }
 
-#section2 .image-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain; /* 비율을 유지하며 전체를 보여줌 */
-    max-width: 120%;
-    max-height: 120%;
-    margin-top: 70px; /* 이미지를 아래로 내림 */
+.bot-bubble {
+    background-color: #FFFFFF;
+    text-align: left;
 }
 
-#section3 {
-    display: flex;
-    justify-content: flex-start; /* 왼쪽 정렬 */
-    align-items: center;
-    height: 100vh;
-    padding: 20px;
-    background-color: white; /* 배경색 설정 */
-}
-
-#section3 .content-wrapper {
-    display: flex;
-    align-items: center; /* 세로 중앙 정렬 */
-    width: 100%; /* 전체 너비 사용 */
-    height: 100%; /* 전체 높이 사용 */
-}
-
-#section3 .image-container {
-    display: flex;
-    justify-content: flex-start; /* 왼쪽 정렬 */
-    align-items: CENTER;
-    width: 80%; /* 이미지 컨테이너 너비 */
-    height: 100%; /* 이미지 컨테이너 높이 */
-    margin-right: 180px; /* 왼쪽으로 이동 */
-    margin-top: 80px; /* 아래쪽으로 이동 */
-}
-
-#section3 .image-container img {
-    width: 120%;
-    height: 120%;
-    max-width: none; /* 최대 너비 제한 없음 */
-    max-height: none; /* 최대 높이 제한 없음 */
-    object-fit: contain; /* 비율 유지하면서 이미지 조정 */
-}
-
-#section3 .text-container {
-    width: 45%; /* 텍스트 컨테이너 너비 */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 20px;
+.chat-input {
     box-sizing: border-box;
-    margin-top: 80px;
-    margin-left: -100px;
-}
-
-#section3 .text-container h2 {
-    font-size: 40px;
-    color: #E7480C;
-    margin: 0 0 10px 0;
-    text-align: left; /* 텍스트 왼쪽 정렬 */
-}
-
-#section3 .text-container p {
-    font-size: 24px;
-    color: #000;
-    margin: 0 0 20px 0;
-    line-height: 1.5;
-    text-align: left; /* 텍스트 왼쪽 정렬 */
-    font-weight: bold;
-}
-
-#section3 .text-container button {
-    padding: 12px 24px;
-    background-color: #E7480C;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 15px;
-    font-weight: bold;
-}
-
-#section3 .text-container button:hover {
-    background-color: #e67e22; /* 호버 시 색상 변경 */
+    border: 1px solid #FFFFFF;
+    border-radius: 5px;
+    width: auto; /* Adjust based on your design */
+    padding: 10px;
 }
 
 
-#section4 {
-    display: flex;
-    justify-content: flex-end; /* 오른쪽 정렬 */
-    align-items: flex-end; /* 아래쪽 정렬 */
-    height: 100vh;
-    padding: 0; /* 패딩 제거 */
-    margin: 0; /* 마진 제거 */
-    background-color: white; /* 배경색 설정 */
+
+.chat-container {
+    flex: 1;
+    max-width: 50%;
+    margin-right: 20px;
 }
 
-#section4 .content-wrapper {
-    display: flex;
-    align-items: flex-end; /* 세로 아래 정렬 */
-    width: 100%; /* 전체 너비 사용 */
-    height: 100%; /* 전체 높이 사용 */
-}
-
-#section4 .text-container {
-    width: 40%; /* 텍스트 컨테이너 너비 */
+#dalle-image {
+    flex: 1;
+    max-width: 50%;
+    margin-left: 20px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end; /* 아래쪽 정렬 */
-    align-items: flex-end; /* 텍스트 오른쪽 정렬 */
-    padding: 0; /* 패딩 제거 */
-    box-sizing: border-box;
-    margin-bottom: 240px; /* 텍스트 컨테이너 아래쪽 여백 */
-    margin-right: -20px; /* 이미지와 텍스트 사이의 간격 줄이기 */
-}
-
-#section4 .text-container h2 {
-    font-size: 40px;
-    color: #E7480C;
-    margin: 0 0 10px 0;
-    text-align: right; /* 텍스트 오른쪽 정렬 */
-}
-
-#section4 .text-container p {
-    font-size: 24px;
-    color: #000;
-    margin: 0 0 20px 0;
-    line-height: 1.5;
-    text-align: right; /* 텍스트 오른쪽 정렬 */
-    font-weight: bold;
-}
-
-#section4 .text-container button {
-    padding: 12px 24px;
-    background-color: #E7480C;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 15px;
-    font-weight: bold;
-}
-
-#section4 .text-container button:hover {
-    background-color: #e67e22; /* 호버 시 색상 변경 */
-}
-
-#section4 .image-container {
-    display: flex;
-    justify-content: flex-end; /* 오른쪽 정렬 */
-    align-items: flex-end; /* 아래쪽 정렬 */
-    width: 80%; /* 이미지 컨테이너 너비 */
-    height: 100%; /* 이미지 컨테이너 높이 */
-    margin-right: -50px; /* 오른쪽 마진 제거 */
-    margin-bottom: -40px; /* 아래쪽 마진 제거 */
-}
-
-#section4 .image-container img {
-    width: 110%;
-    height: 110%;
-    max-width: none; /* 최대 너비 제한 없음 */
-    max-height: none; /* 최대 높이 제한 없음 */
-    object-fit: contain; /* 비율 유지하면서 이미지 조정 */
-}
-
-
-#section5 {
-    display: flex;
-    justify-content: flex-start; /* 왼쪽 정렬 */
     align-items: center;
-    height: 100vh;
-    padding: 20px;
-    background-color: white; /* 배경색 설정 */
+    width: 500px; /* 고정 너비 */
+    height: 400px; /* 고정 높이 */
+    margin-top: 110px;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
 }
 
-#section5 .content-wrapper {
-    display: flex;
-    align-items: center; /* 세로 중앙 정렬 */
-    width: 100%; /* 전체 너비 사용 */
-    height: 100%; /* 전체 높이 사용 */
+#dalle-image img {
+    max-width: 100%;
+    border-radius: 10px;
+    width: 490px; /* 고정 너비 */
+    height: 370px;
+
 }
 
-#section5 .image-container {
-    display: flex;
-    justify-content: flex-start; /* 왼쪽 정렬 */
-    align-items: center;
-    width: 80%; /* 이미지 컨테이너 너비 */
-    height: 100%; /* 이미지 컨테이너 높이 */
-    margin-right: 180px; /* 왼쪽으로 이동 */
-    margin-top: 80px; /* 아래쪽으로 이동 */
+#dalle-image .loading {
+    text-align: center;
+    font-size: 16px;
+    color: #666;
+    margin-top: 10px;
 }
 
-#section5 .image-container img {
-    width: 120%;
-    height: 120%;
-    max-width: none; /* 최대 너비 제한 없음 */
-    max-height: none; /* 최대 높이 제한 없음 */
-    object-fit: contain; /* 비율 유지하면서 이미지 조정 */
+#next {
+    display: none; /* 기존 스타일 유지 */
+    padding: 12px 20px; /* 패딩을 늘려 버튼 크기를 크게 만듦 */
+    background-color: #FF4500; /* 배경색을 파란색으로 설정 */
+    color: white; /* 글자색을 흰색으로 설정 */
+    border: none; /* 테두리 제거 */
+    border-radius: 20px; /* 모서리를 둥글게 설정 */
+    font-size: 16px; /* 글자 크기를 늘림 */
+    font-weight: bold; /* 글자 굵기를 굵게 설정 */
+    position: fixed; /* 위치를 고정 */
+    bottom: 70px; /* 하단에서 20px 떨어짐 */
+    left: 50%; /* 좌측에서 50% 떨어짐 */
+    transform: translateX(-50%); /* 중앙 정렬 */
 }
 
-#section5 .text-container {
-    width: 45%; /* 텍스트 컨테이너 너비 */
+#next:hover {
+    background-color: #e67e22; /* 호버 시 더 어두운 파란색으로 변경 */
+}
+
+
+
+#dalle-image2 {
+    flex: 1;
+    max-width: 50%;
+    margin-left: 20px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 20px;
-    box-sizing: border-box;
-    margin-top: 80px;
-    margin-left: -100px;
+    align-items: center;
+    width: 500px; /* 고정 너비 */
+    height: 400px; /* 고정 높이 */
+    margin-top: 110px;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
 }
 
-#section5 .text-container h2 {
-    font-size: 40px;
-    color: #E7480C;
-    margin: 0 0 10px 0;
-    text-align: left; /* 텍스트 왼쪽 정렬 */
+#dalle-image2 img {
+    max-width: 100%;
+    border-radius: 10px;
+    width: 490px; /* 고정 너비 */
+    height: 370px;
+
 }
 
-#section5 .text-container p {
-    font-size: 24px;
-    color: #000;
-    margin: 0 0 20px 0;
-    line-height: 1.5;
-    text-align: left; /* 텍스트 왼쪽 정렬 */
-    font-weight: bold;
+#dalle-image2 .loading {
+    text-align: center;
+    font-size: 16px;
+    color: #666;
+    margin-top: 10px;
 }
 
-#section5 .text-container button {
-    padding: 12px 24px;
-    background-color: #E7480C;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 15px;
-    font-weight: bold;
-}
 
-#section5 .text-container button:hover {
-    background-color: #e67e22; /* 호버 시 색상 변경 */
-}
-
-#section6 {
+#dalle-image3 {
+    flex: 1;
+    max-width: 50%;
+    margin-left: 20px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    height: 100vh;
-    padding: 20px;
-    background-color: #E98D6B; /* 배경색 설정 */
+    width: 500px; /* 고정 너비 */
+    height: 400px; /* 고정 높이 */
+    margin-top: 110px;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
 }
 
-#section6 .image-container {
-    display: flex;
-    justify-content: center; /* 이미지를 균등하게 배치 */
-    align-items: center;
-    width: 100%; /* 컨테이너 너비 조정 */
-    margin-top: 50px;
-    gap: 100px;
+#dalle-image3 img {
+    max-width: 100%;
+    border-radius: 10px;
+    width: 490px; /* 고정 너비 */
+    height: 370px;
+
 }
 
-#section6 .image-container a {
-    max-width: 100%; /* 각 링크의 최대 너비 설정 */
-    height: auto; /* 비율 유지 */
-    display: block;
-    margin-bottom: 50px;
-}
-
-#section6 .image-container img {
-    width: 1000px; /* 링크 내부 이미지는 링크 크기에 맞춤 */
-    height: auto; /* 비율 유지 */
-    display: block;
-    border-radius: 15px; /* 둥근 모서리 설정 */
-    transition: transform 0.3s; /* 애니메이션 추가 */
-}
-
-#section6 .image-container img:hover {
-    transform: scale(0.9); /* 호버 시 이미지 크기 증가 */
-}
-
-#section6 .button-container {
-    margin-top: 50px; /* 이미지와 버튼 사이 간격 */
-}
-
-#section6 .button-container button {
-    padding: 12px 24px;
-    background-color: #E7480C;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 15px;
-    font-size: 18px;
-    font-weight: bold;
-}
-
-#section6 .button-container button:hover {
-    background-color: #e67e22; /* 호버 시 색상 변경 */
+#dalle-image3 .loading {
+    text-align: center;
+    font-size: 16px;
+    color: #666;
+    margin-top: 10px;
 }
