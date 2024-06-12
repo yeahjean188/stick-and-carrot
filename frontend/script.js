@@ -102,7 +102,8 @@ async function start() {
 
             //Push
             assistantMessages.push(data1.assistant);
-            dalleprompt = data1.assistant;
+            const desiredContent = 'The illustration has a bright and vibrant color palette with a whimsical and magical feel. The characters are cute and cartoonish with big, expressive eyes. The scene has a warm and friendly atmosphere.';
+            dalleprompt = data1.assistant + desiredContent;
             // backcontent = nextstory; //backcontent를 업데이트합니다.
             //console.log('Response:', data1);
         }
@@ -173,9 +174,9 @@ async function next() {
         // 동화책 이어서 생성 자동화 입력 : 페이지에 맞게 작성, 마지막 페이지 이후에는 솔루션 프롬프트로 넣기
         if(nextCallCount<=4){
             const n = nextCallCount;
-            message2 = `Write the ${n}th story out of a total of five pages. It's the backstory of '${backcontent2}'.`;  
+            message2 = `Write the ${n}th story out of a total of five pages in less than 400 characters. It's the backstory of '${backcontent2}'.`;  
         }else{
-            message2 = `'${backcontent2}' Please wrap up the story by writing the following story.`;
+            message2 = `'${backcontent2}' Please wrap up the story in less than 400 characters by writing the following story.`;
         }
         console.log(nextCallCount);
 
@@ -257,7 +258,8 @@ async function next() {
 
                 //Push
                 assistantMessages.push(data1.assistant);
-                dalleprompt = data1.assistant;
+                const desiredContent = 'The illustration has a bright and vibrant color palette with a whimsical and magical feel. The characters are cute and cartoonish with big, expressive eyes. The scene has a warm and friendly atmosphere.';
+                dalleprompt = data1.assistant + desiredContent;
                 // console.log('Response:', data1);
             }
             catch (error) {
