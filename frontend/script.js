@@ -100,9 +100,8 @@ async function start() {
 
             //Push
             assistantMessages.push(data1.assistant);
-            dalleprompt = data1.assistant;
-            // backcontent = nextstory; //backcontent를 업데이트합니다.
-            //console.log('Response:', data1);
+            const desiredContent = 'The illustration has a bright and vibrant color palette with a whimsical and magical feel. The characters are cute and cartoonish with big, expressive eyes. The scene has a warm and friendly atmosphere.';
+            dalleprompt = data1.assistant + desiredContent;
 
             //채팅 말풍선에 챗GPT 응답 출력
             const botBubble = document.createElement('div');
@@ -176,9 +175,9 @@ async function next() {
         // 동화책 이어서 생성 자동화 입력 : 페이지에 맞게 작성, 마지막 페이지 이후에는 솔루션 프롬프트로 넣기
         if(nextCallCount<=4){
             const n = nextCallCount;
-            message2 = `Write the ${n}th story out of a total of five pages. It's the backstory of '${backcontent2}'.`;  
+            message2 = `Write the ${n}th story out of a total of five pages in less than 400 characters. It's the backstory of '${backcontent2}'. Please continue writing the story.`;  
         }else{
-            message2 = `'${backcontent2}' Please wrap up the story by writing the following story.`;
+            message2 = `'${backcontent2}' Please wrap up the story in less than 400 characters by writing the following story.`;
         }
         console.log(nextCallCount);
 
@@ -260,9 +259,8 @@ async function next() {
 
                 //Push
                 assistantMessages.push(data1.assistant);
-                dalleprompt = data1.assistant;
-                // backcontent = nextstory; //backcontent를 업데이트합니다.
-                //console.log('Response:', data1);
+                const desiredContent = 'The illustration has a bright and vibrant color palette with a whimsical and magical feel. The characters are cute and cartoonish with big, expressive eyes. The scene has a warm and friendly atmosphere.';
+                dalleprompt = data1.assistant + desiredContent;
 
                 //채팅 말풍선에 챗GPT 응답 출력
                 const botBubble = document.createElement('div');
@@ -308,7 +306,7 @@ async function next() {
         document.getElementById("chat3").style.display = "block";
         document.getElementById("dalle-image3").style.display = "block";
 
-        message2 = `Please introduce a recipe that I can eat ${myHateFood} well`;
+        message2 = `Please introduce a recipe that I can eat ${myHateFood} well.Please write in less than 400 characters.`;
         // Push
         userMessages.push(message2);
 
